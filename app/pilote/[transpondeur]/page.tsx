@@ -2,35 +2,29 @@ import stats from "../../../data/stats.json";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 
-export default async function Page({
+export default function Page({
   params,
 }: {
-  params: Promise<{
+  params: {
     transpondeur: string;
-  }>;
+  };
 }) {
-  const { transpondeur } =
-    await params;
+  const { transpondeur } = params;
 
-  const piloteStats =
-    stats.filter(
-      (p: any) =>
-        String(
-          p.transpondeur
-        ) === transpondeur
-    );
+  const piloteStats = stats.filter(
+    (p: any) =>
+      String(p.transpondeur) ===
+      transpondeur
+  );
 
-  if (
-    piloteStats.length === 0
-  ) {
+  if (piloteStats.length === 0) {
     notFound();
   }
 
-  const latest =
-    [...piloteStats].sort(
-      (a: any, b: any) =>
-        b.year - a.year
-    )[0];
+  const latest = [...piloteStats].sort(
+    (a: any, b: any) =>
+      b.year - a.year
+  )[0];
 
   const totalSessions =
     piloteStats.reduce(
@@ -46,19 +40,17 @@ export default async function Page({
       0
     );
 
-  const bestLap =
-    Math.min(
-      ...piloteStats.map(
-        (p: any) => p.bestLap
-      )
-    );
+  const bestLap = Math.min(
+    ...piloteStats.map(
+      (p: any) => p.bestLap
+    )
+  );
 
-  const maxSpeed =
-    Math.max(
-      ...piloteStats.map(
-        (p: any) => p.maxSpeed
-      )
-    );
+  const maxSpeed = Math.max(
+    ...piloteStats.map(
+      (p: any) => p.maxSpeed
+    )
+  );
 
   const classementGeneral =
     [...stats].sort(
@@ -70,8 +62,7 @@ export default async function Page({
     classementGeneral.findIndex(
       (p: any) =>
         p.transpondeur ===
-          latest.transpondeur &&
-        p.year === latest.year
+        latest.transpondeur
     ) + 1;
 
   function getMedal(
@@ -113,7 +104,8 @@ export default async function Page({
       </h1>
 
       <p>
-        Transpondeur :{" "}
+        Transpondeur :
+        {" "}
         {transpondeur}
       </p>
 
@@ -124,7 +116,9 @@ export default async function Page({
           color: "#c28b00",
         }}
       >
-        🏅 Rang général : #{rangGeneral}
+        🏅 Rang général :
+        {" "}
+        #{rangGeneral}
       </p>
 
       <div
@@ -138,20 +132,12 @@ export default async function Page({
         }}
       >
         <div>
-          <h3>
-            📅 Sessions
-          </h3>
-
-          <h2>
-            {totalSessions}
-          </h2>
+          <h3>📅 Sessions</h3>
+          <h2>{totalSessions}</h2>
         </div>
 
         <div>
-          <h3>
-            🔄 Tours
-          </h3>
-
+          <h3>🔄 Tours</h3>
           <h2>
             {totalLaps.toLocaleString()}
           </h2>
@@ -161,7 +147,6 @@ export default async function Page({
           <h3>
             🏆 Record personnel
           </h3>
-
           <h2>
             {bestLap.toFixed(3)} s
           </h2>
@@ -171,127 +156,27 @@ export default async function Page({
           <h3>
             🚀 Vitesse max
           </h3>
-
           <h2>
-            {maxSpeed.toFixed(3)} km/h
+            {maxSpeed.toFixed(3)}
+            {" "}
+            km/h
           </h2>
         </div>
       </div>
 
-<h2
-  style={{
-    marginTop: "50px",
-    marginBottom: "20px",
-  }}
->
-  📈 Évolution du meilleur tour
-</h2>
-
-<div
-  style={{
-    display: "flex",
-    flexDirection: "column",
-    gap: "15px",
-    marginBottom: "40px",
-  }}
->
-
-  {[...piloteStats]
-    .sort(
-      (a: any, b: any) =>
-        a.year - b.year
-    )
-    .map((yearStat: any) => {
-
-      const maxTime =
-        Math.max(
-          ...piloteStats.map(
-            (p: any) =>
-              p.bestLap
-          )
-        );
-
-      const minTime =
-        Math.min(
-          ...piloteStats.map(
-            (p: any) =>
-              p.bestLap
-          )
-        );
-
-      const percent =
-        (
-          (
-            maxTime -
-            yearStat.bestLap
-          ) /
-          (
-            maxTime -
-            minTime || 1
-          )
-        ) * 100;
-
-      return (
-        <div
-          key={yearStat.year}
-        >
-          <div
-            style={{
-              display: "flex",
-              justifyContent:
-                "space-between",
-              marginBottom: "5px",
-            }}
-          >
-            <strong>
-              {yearStat.year}
-            </strong>
-
-            <span>
-              {yearStat.bestLap.toFixed(
-                3
-              )}{" "}
-              s
-            </span>
-          </div>
-
-          <div
-            style={{
-              height: "20px",
-              background:
-                "#e5e7eb",
-              borderRadius:
-                "10px",
-              overflow:
-                "hidden",
-            }}
-          >
-            <div
-              style={{
-                width:
-                  `${percent}%`,
-                height:
-                  "100%",
-                background:
-                  "#2563eb",
-              }}
-            />
-          </div>
-        </div>
-      );
-    })}
-
-</div>
-
-      <h2>
+      <h2
+        style={{
+          marginBottom: "20px",
+        }}
+      >
         📅 Historique annuel
       </h2>
 
       <table
         style={{
           width: "100%",
-          marginTop: "20px",
-          borderCollapse: "collapse",
+          borderCollapse:
+            "collapse",
           tableLayout: "fixed",
         }}
       >
@@ -306,7 +191,6 @@ export default async function Page({
               style={{
                 textAlign: "left",
                 padding: "12px",
-                width: "12%",
               }}
             >
               Année
@@ -316,7 +200,6 @@ export default async function Page({
               style={{
                 textAlign: "left",
                 padding: "12px",
-                width: "12%",
               }}
             >
               Rang
@@ -326,7 +209,6 @@ export default async function Page({
               style={{
                 textAlign: "left",
                 padding: "12px",
-                width: "16%",
               }}
             >
               Sessions
@@ -336,7 +218,6 @@ export default async function Page({
               style={{
                 textAlign: "left",
                 padding: "12px",
-                width: "18%",
               }}
             >
               Tours
@@ -346,7 +227,6 @@ export default async function Page({
               style={{
                 textAlign: "left",
                 padding: "12px",
-                width: "22%",
               }}
             >
               Meilleur tour
@@ -356,7 +236,6 @@ export default async function Page({
               style={{
                 textAlign: "left",
                 padding: "12px",
-                width: "20%",
               }}
             >
               Vitesse max
@@ -374,7 +253,6 @@ export default async function Page({
               (
                 yearStat: any
               ) => {
-
                 const classementAnnee =
                   stats
                     .filter(
@@ -400,7 +278,9 @@ export default async function Page({
 
                 return (
                   <tr
-                    key={yearStat.year}
+                    key={
+                      yearStat.year
+                    }
                     style={{
                       borderBottom:
                         "1px solid #eee",
@@ -408,7 +288,8 @@ export default async function Page({
                   >
                     <td
                       style={{
-                        padding: "12px",
+                        padding:
+                          "12px",
                       }}
                     >
                       {yearStat.year}
@@ -416,11 +297,10 @@ export default async function Page({
 
                     <td
                       style={{
-                        padding: "12px",
+                        padding:
+                          "12px",
                         fontWeight:
                           "bold",
-                        fontSize:
-                          "18px",
                       }}
                     >
                       {getMedal(
@@ -430,15 +310,19 @@ export default async function Page({
 
                     <td
                       style={{
-                        padding: "12px",
+                        padding:
+                          "12px",
                       }}
                     >
-                      {yearStat.sessions}
+                      {
+                        yearStat.sessions
+                      }
                     </td>
 
                     <td
                       style={{
-                        padding: "12px",
+                        padding:
+                          "12px",
                       }}
                     >
                       {yearStat.laps.toLocaleString()}
@@ -446,23 +330,26 @@ export default async function Page({
 
                     <td
                       style={{
-                        padding: "12px",
+                        padding:
+                          "12px",
                       }}
                     >
                       {yearStat.bestLap.toFixed(
                         3
-                      )}{" "}
-                      s
+                      )}
+                      {" "}s
                     </td>
 
                     <td
                       style={{
-                        padding: "12px",
+                        padding:
+                          "12px",
                       }}
                     >
                       {yearStat.maxSpeed.toFixed(
                         3
-                      )}{" "}
+                      )}
+                      {" "}
                       km/h
                     </td>
                   </tr>
@@ -470,7 +357,6 @@ export default async function Page({
               }
             )}
         </tbody>
-
       </table>
     </main>
   );
