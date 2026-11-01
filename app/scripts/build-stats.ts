@@ -1,0 +1,195 @@
+import fs from "fs";
+
+const activities = JSON.parse(
+  fs.readFileSync(
+    "./data/activities.json",
+    "utf8"
+  )
+);
+
+const drivers: any = {};
+
+for (const activity of activities) {
+
+  const file =
+    `./data/sessions/${activity.id}.csv`;
+
+  if (!fs.existsSync(file))
+    continue;
+
+  const csv =
+    fs.readFileSync(
+      file,
+      "utf8"
+    );
+
+  const lines =
+    csv.split("\n");
+
+  let laps = 0;
+  let bestLap = Number.MAX_VALUE;
+  let maxSpeed = 0;
+  let lapSum = 0;
+
+  for (const line of lines) {
+
+    if (!line.includes("km/h"))
+      continue;
+
+    const cols =
+      line.split(",");
+
+    if (cols.length < 8)
+      continue;
+
+    const lapTime =
+      cols[5];
+
+    const speed =
+      cols[7];
+
+    const timeMatch =
+      lapTime.match(
+        /0:00:(\d+\.\d+)/
+      );
+
+    const speedMatch =
+      speed.match(
+        /(\d+\.\d+)/
+      );
+
+    if (timeMatch) {
+
+      laps++;
+
+      const sec =
+        parseFloat(
+          timeMatch[1]
+        );
+
+      lapSum += sec;
+
+      if (sec < bestLap) {
+        bestLap = sec;
+      }
+    }
+
+    if (speedMatch) {
+
+      const kmh =
+        parseFloat(
+          speedMatch[1]
+        );
+
+      if (kmh > maxSpeed) {
+        maxSpeed = kmh;
+      }
+    }
+  }
+
+  const pilote =
+    activity.chipLabel || "Inconnu";
+
+  const year =
+    new Date(
+      activity.startTime
+    ).getFullYear();
+
+  const key =
+    `${pilote}-${year}`;
+
+  if (!drivers[key]) {
+
+    drivers[key] = {
+
+      pilote,
+
+      transpondeur:
+        activity.chipCode,
+
+      year,
+
+      sessions: 0,
+
+      laps: 0,
+
+      bestLap:
+        Number.MAX_VALUE,
+
+      maxSpeed: 0,
+
+      averageLap: 0,
+
+      totalRuntimeMinutes: 0
+    };
+  }
+
+  drivers[key].sessions++;
+
+  drivers[key].laps += laps;
+
+  drivers[key].totalRuntimeMinutes +=
+    lapSum / 60;
+
+  if (
+    laps > 0
+  ) {
+
+    const currentAverage =
+      lapSum / laps;
+
+    if (
+      drivers[key].averageLap === 0
+    ) {
+
+      drivers[key].averageLap =
+        currentAverage;
+
+    } else {
+
+      drivers[key].averageLap =
+        (
+          drivers[key].averageLap +
+          currentAverage
+        ) / 2;
+    }
+  }
+
+  if (
+    bestLap <
+    drivers[key].bestLap
+  ) {
+
+    drivers[key].bestLap =
+      bestLap;
+  }
+
+  if (
+    maxSpeed >
+    drivers[key].maxSpeed
+  ) {
+
+    drivers[key].maxSpeed =
+      maxSpeed;
+  }
+}
+
+const stats =
+  Object.values(drivers)
+    .sort(
+      (a: any, b: any) =>
+        a.bestLap - b.bestLap
+    );
+
+fs.writeFileSync(
+  "./data/stats.json",
+  JSON.stringify(
+    stats,
+    null,
+    2
+  )
+);
+
+console.log(
+  `${stats.length} statistiques générées`
+);

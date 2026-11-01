@@ -1,0 +1,49 @@
+import "./globals.css";
+import Link from "next/link";
+
+export default function RootLayout({
+  children,
+}: {
+  children: React.ReactNode;
+}) {
+  return (
+    <html lang="fr">
+      <body>
+
+        <nav
+          style={{
+            background: "#1e293b",
+            padding: "15px",
+            display: "flex",
+            gap: "20px",
+          }}
+        >
+          <Link
+            href="/"
+            style={{ color: "white" }}
+          >
+            Accueil
+          </Link>
+
+          <Link
+            href="/classement"
+            style={{ color: "white" }}
+          >
+            Classement
+          </Link>
+
+          <Link
+            href="/hall-of-fame"
+            style={{ color: "white" }}
+          >
+            Hall Of Fame
+          </Link>
+
+        </nav>
+
+        {children}
+
+      </body>
+    </html>
+  );
+}
