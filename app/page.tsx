@@ -2,14 +2,20 @@
 
 import { useState } from "react";
 import Link from "next/link";
+
 import stats from "../data/stats.json";
+import lastSync from "../data/last-sync.json";
 
 export default function Home() {
   const years = [
     ...new Set(
-      stats.map((p: any) => p.year)
+      stats.map(
+        (p: any) => p.year
+      )
     ),
-  ].sort((a: any, b: any) => b - a);
+  ].sort(
+    (a: any, b: any) => b - a
+  );
 
   const [selectedYear, setSelectedYear] =
     useState("Toutes");
@@ -19,52 +25,74 @@ export default function Home() {
       ? stats
       : stats.filter(
           (p: any) =>
-            p.year === Number(selectedYear)
+            p.year ===
+            Number(selectedYear)
         );
 
-  const nombrePilotes = new Set(
-    filteredStats.map(
-      (p: any) => p.transpondeur
-    )
-  ).size;
+  const syncDate = new Date(
+    lastSync.lastSync
+  );
+
+  const formattedSyncDate =
+    syncDate.toLocaleString(
+      "fr-FR",
+      {
+        day: "2-digit",
+        month: "2-digit",
+        year: "numeric",
+        hour: "2-digit",
+        minute: "2-digit",
+      }
+    );
+
+  const nombrePilotes =
+    new Set(
+      filteredStats.map(
+        (p: any) =>
+          p.transpondeur
+      )
+    ).size;
 
   const nombreSessions =
     filteredStats.reduce(
-      (sum: number, pilote: any) =>
-        sum + pilote.sessions,
+      (
+        sum: number,
+        pilote: any
+      ) =>
+        sum +
+        pilote.sessions,
       0
     );
 
   const nombreTours =
     filteredStats.reduce(
-      (sum: number, pilote: any) =>
+      (
+        sum: number,
+        pilote: any
+      ) =>
         sum + pilote.laps,
       0
     );
 
   const recordAbsolu =
-    filteredStats.length > 0
-      ? [...filteredStats].sort(
-          (a: any, b: any) =>
-            a.bestLap - b.bestLap
-        )[0]
-      : null;
+    [...filteredStats].sort(
+      (a: any, b: any) =>
+        a.bestLap -
+        b.bestLap
+    )[0];
 
   const vitesseMax =
-    filteredStats.length > 0
-      ? [...filteredStats].sort(
-          (a: any, b: any) =>
-            b.maxSpeed - a.maxSpeed
-        )[0]
-      : null;
+    [...filteredStats].sort(
+      (a: any, b: any) =>
+        b.maxSpeed -
+        a.maxSpeed
+    )[0];
 
   const plusGrosRouleur =
-    filteredStats.length > 0
-      ? [...filteredStats].sort(
-          (a: any, b: any) =>
-            b.laps - a.laps
-        )[0]
-      : null;
+    [...filteredStats].sort(
+      (a: any, b: any) =>
+        b.laps - a.laps
+    )[0];
 
   return (
     <main
@@ -73,44 +101,72 @@ export default function Home() {
       }}
     >
       <h1>
-        🏁 CMLP Performance Center
+        🏁 CMLP
+        Performance
+        Center
       </h1>
 
       <p>
-        Statistiques issues de Speedhive
+        Statistiques
+        issues de
+        Speedhive
+      </p>
+
+      <p
+        style={{
+          marginTop: "10px",
+          color: "#666",
+          fontSize: "14px",
+        }}
+      >
+        🕒 Dernière
+        synchronisation :
+        {" "}
+        {
+          formattedSyncDate
+        }
       </p>
 
       <div
         style={{
           marginTop: "20px",
-          marginBottom: "30px",
+          marginBottom:
+            "30px",
         }}
       >
         <label>
-          📆 Année :
+          📅 Année :
         </label>
 
         <select
-          value={selectedYear}
+          value={
+            selectedYear
+          }
           onChange={(e) =>
             setSelectedYear(
               e.target.value
             )
           }
           style={{
-            marginLeft: "10px",
+            marginLeft:
+              "10px",
             padding: "8px",
           }}
         >
           <option value="Toutes">
-            Toutes les années
+            Toutes les
+            années
           </option>
 
           {years.map(
-            (year: any) => (
+            (
+              year: any
+            ) => (
               <option
                 key={year}
-                value={year}
+                value={
+                  year
+                }
               >
                 {year}
               </option>
@@ -127,61 +183,82 @@ export default function Home() {
           gap: "20px",
         }}
       >
-        {recordAbsolu && (
-          <div
-            style={{
-              border: "1px solid #ddd",
-              borderRadius: "10px",
-              padding: "20px",
-            }}
-          >
-            <h3>🏆 Record absolu</h3>
-
-            <h2>
-              {recordAbsolu.bestLap.toFixed(
-                3
-              )}
-            </h2>
-
-            <p>
-              <Link
-                href={`/pilote/${recordAbsolu.transpondeur}`}
-              >
-                {recordAbsolu.pilote}
-              </Link>
-            </p>
-
-            <small>
-              Année : {recordAbsolu.year}
-            </small>
-          </div>
-        )}
-
         <div
           style={{
-            border: "1px solid #ddd",
-            borderRadius: "10px",
-            padding: "20px",
+            border:
+              "1px solid #ddd",
+            borderRadius:
+              "10px",
+            padding:
+              "20px",
           }}
         >
           <h3>
-            👥 Nombre de pilotes
+            🏆 Record
+            absolu
           </h3>
 
           <h2>
-            {nombrePilotes}
+            {recordAbsolu?.bestLap.toFixed(
+              3
+            )}{" "}
+            s
+          </h2>
+
+          <p>
+            <Link
+              href={`/pilote/${recordAbsolu?.transpondeur}`}
+            >
+              {
+                recordAbsolu?.pilote
+              }
+            </Link>
+          </p>
+
+          <small>
+            Année :
+            {" "}
+            {
+              recordAbsolu?.year
+            }
+          </small>
+        </div>
+
+        <div
+          style={{
+            border:
+              "1px solid #ddd",
+            borderRadius:
+              "10px",
+            padding:
+              "20px",
+          }}
+        >
+          <h3>
+            👥 Nombre
+            de pilotes
+          </h3>
+
+          <h2>
+            {
+              nombrePilotes
+            }
           </h2>
         </div>
 
         <div
           style={{
-            border: "1px solid #ddd",
-            borderRadius: "10px",
-            padding: "20px",
+            border:
+              "1px solid #ddd",
+            borderRadius:
+              "10px",
+            padding:
+              "20px",
           }}
         >
           <h3>
-            📅 Nombre de sessions
+            📅 Nombre
+            de sessions
           </h3>
 
           <h2>
@@ -191,13 +268,18 @@ export default function Home() {
 
         <div
           style={{
-            border: "1px solid #ddd",
-            borderRadius: "10px",
-            padding: "20px",
+            border:
+              "1px solid #ddd",
+            borderRadius:
+              "10px",
+            padding:
+              "20px",
           }}
         >
           <h3>
-            🔄 Nombre total de tours
+            🔄 Nombre
+            total de
+            tours
           </h3>
 
           <h2>
@@ -205,84 +287,105 @@ export default function Home() {
           </h2>
         </div>
 
-        {plusGrosRouleur && (
-          <div
-            style={{
-              border: "1px solid #ddd",
-              borderRadius: "10px",
-              padding: "20px",
-            }}
-          >
-            <h3>
-              🔥 Plus gros rouleur
-            </h3>
+        <div
+          style={{
+            border:
+              "1px solid #ddd",
+            borderRadius:
+              "10px",
+            padding:
+              "20px",
+          }}
+        >
+          <h3>
+            🔥 Plus gros
+            rouleur
+          </h3>
 
-            <h2>
-              {plusGrosRouleur.laps.toLocaleString()}
-              {" "}tours
-            </h2>
+          <h2>
+            {plusGrosRouleur?.laps.toLocaleString()}{" "}
+            tours
+          </h2>
 
-            <p>
-              <Link
-                href={`/pilote/${plusGrosRouleur.transpondeur}`}
-              >
-                {plusGrosRouleur.pilote}
-              </Link>
-            </p>
+          <p>
+            <Link
+              href={`/pilote/${plusGrosRouleur?.transpondeur}`}
+            >
+              {
+                plusGrosRouleur?.pilote
+              }
+            </Link>
+          </p>
 
-            <small>
-              Année : {plusGrosRouleur.year}
-            </small>
-          </div>
-        )}
+          <small>
+            Année :
+            {" "}
+            {
+              plusGrosRouleur?.year
+            }
+          </small>
+        </div>
 
-        {vitesseMax && (
-          <div
-            style={{
-              border: "1px solid #ddd",
-              borderRadius: "10px",
-              padding: "20px",
-            }}
-          >
-            <h3>
-              🚀 Vitesse maximale
-            </h3>
+        <div
+          style={{
+            border:
+              "1px solid #ddd",
+            borderRadius:
+              "10px",
+            padding:
+              "20px",
+          }}
+        >
+          <h3>
+            🚀 Vitesse
+            maximale
+          </h3>
 
-            <h2>
-              {vitesseMax.maxSpeed.toFixed(
-                3
-              )} km/h
-            </h2>
+          <h2>
+            {vitesseMax?.maxSpeed.toFixed(
+              3
+            )}{" "}
+            km/h
+          </h2>
 
-            <p>
-              <Link
-                href={`/pilote/${vitesseMax.transpondeur}`}
-              >
-                {vitesseMax.pilote}
-              </Link>
-            </p>
+          <p>
+            <Link
+              href={`/pilote/${vitesseMax?.transpondeur}`}
+            >
+              {
+                vitesseMax?.pilote
+              }
+            </Link>
+          </p>
 
-            <small>
-              Année : {vitesseMax.year}
-            </small>
-          </div>
-        )}
+          <small>
+            Année :
+            {" "}
+            {
+              vitesseMax?.year
+            }
+          </small>
+        </div>
       </div>
 
       <div
         style={{
-          marginTop: "50px",
+          marginTop:
+            "50px",
         }}
       >
         <h2>
-          🏆 Top 10 Pilotes
+          🏆 Top 10
+          Pilotes
         </h2>
 
         <table
           style={{
             width: "100%",
-            marginTop: "20px",
-            borderCollapse: "collapse",
+            marginTop:
+              "20px",
+            borderCollapse:
+              "collapse",
           }}
         >
           <thead>
@@ -294,8 +397,10 @@ export default function Home() {
             >
               <th
                 style={{
-                  textAlign: "left",
-                  padding: "12px",
+                  textAlign:
+                    "left",
+                  padding:
+                    "12px",
                 }}
               >
                 Rang
@@ -303,8 +408,10 @@ export default function Home() {
 
               <th
                 style={{
-                  textAlign: "left",
-                  padding: "12px",
+                  textAlign:
+                    "left",
+                  padding:
+                    "12px",
                 }}
               >
                 Pilote
@@ -312,8 +419,10 @@ export default function Home() {
 
               <th
                 style={{
-                  textAlign: "left",
-                  padding: "12px",
+                  textAlign:
+                    "left",
+                  padding:
+                    "12px",
                 }}
               >
                 Année
@@ -321,17 +430,22 @@ export default function Home() {
 
               <th
                 style={{
-                  textAlign: "left",
-                  padding: "12px",
+                  textAlign:
+                    "left",
+                  padding:
+                    "12px",
                 }}
               >
-                Meilleur Tour
+                Meilleur
+                Tour
               </th>
 
               <th
                 style={{
-                  textAlign: "left",
-                  padding: "12px",
+                  textAlign:
+                    "left",
+                  padding:
+                    "12px",
                 }}
               >
                 Sessions
@@ -341,18 +455,17 @@ export default function Home() {
 
           <tbody>
             {filteredStats
-              .slice(0, 10)
+              .slice(
+                0,
+                10
+              )
               .map(
                 (
                   pilote: any,
                   index
                 ) => (
                   <tr
-                    key={
-                      pilote.transpondeur +
-                      "-" +
-                      pilote.year
-                    }
+                    key={`${pilote.transpondeur}-${pilote.year}`}
                     style={{
                       borderBottom:
                         "1px solid #eee",
@@ -360,56 +473,63 @@ export default function Home() {
                   >
                     <td
                       style={{
-                        padding: "12px",
+                        padding:
+                          "12px",
                       }}
                     >
-                      {index + 1}
+                      {
+                        index +
+                        1
+                      }
                     </td>
 
                     <td
                       style={{
-                        padding: "12px",
+                        padding:
+                          "12px",
                       }}
                     >
                       <Link
                         href={`/pilote/${pilote.transpondeur}`}
-                        style={{
-                          textDecoration:
-                            "none",
-                          fontWeight:
-                            "bold",
-                          color:
-                            "#0070f3",
-                        }}
                       >
-                        {pilote.pilote}
+                        {
+                          pilote.pilote
+                        }
                       </Link>
                     </td>
 
                     <td
                       style={{
-                        padding: "12px",
+                        padding:
+                          "12px",
                       }}
                     >
-                      {pilote.year}
+                      {
+                        pilote.year
+                      }
                     </td>
 
                     <td
                       style={{
-                        padding: "12px",
+                        padding:
+                          "12px",
                       }}
                     >
                       {pilote.bestLap.toFixed(
                         3
-                      )}
+                      )}{" "}
+                      s
                     </td>
 
                     <td
                       style={{
-                        padding: "12px",
+                        padding:
+                          "12px",
                       }}
                     >
-                      {pilote.sessions}
+                      {
+                        pilote.sessions
+                      }
                     </td>
                   </tr>
                 )
