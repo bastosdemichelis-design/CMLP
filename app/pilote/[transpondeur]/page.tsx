@@ -1,3 +1,5 @@
+export const dynamic = "force-dynamic";
+
 import stats from "../../../data/stats.json";
 import Link from "next/link";
 import { notFound } from "next/navigation";
@@ -336,8 +338,7 @@ export default function Page({
                     >
                       {yearStat.bestLap.toFixed(
                         3
-                      )}
-                      {" "}s
+                      )} s
                     </td>
 
                     <td
@@ -348,9 +349,7 @@ export default function Page({
                     >
                       {yearStat.maxSpeed.toFixed(
                         3
-                      )}
-                      {" "}
-                      km/h
+                      )} km/h
                     </td>
                   </tr>
                 );
