@@ -1,57 +1,37 @@
 import { execSync } from "child_process";
 
-console.log("");
-console.log("🏁 Début synchronisation");
-console.log("");
+console.log("🏁 Synchronisation CMLP");
 
 try {
 
-  console.log(
-    "📥 Synchronisation activités..."
+  execSync(
+    "npx.cmd tsx app/scripts/sync.ts",
+    { stdio: "inherit" }
   );
 
   execSync(
-    "npx tsx app/scripts/sync.ts",
-    {
-      stdio: "inherit",
-    }
-  );
-
-  console.log("");
-  console.log(
-    "📥 Téléchargement sessions..."
+    "npx.cmd tsx app/scripts/download-all-sessions.ts",
+    { stdio: "inherit" }
   );
 
   execSync(
-    "npx tsx app/scripts/download-all-sessions.ts",
-    {
-      stdio: "inherit",
-    }
-  );
-
-  console.log("");
-  console.log(
-    "📊 Génération statistiques..."
+    "npx.cmd tsx app/scripts/build-stats.ts",
+    { stdio: "inherit" }
   );
 
   execSync(
-    "npx tsx app/scripts/build-stats.ts",
-    {
-      stdio: "inherit",
-    }
+    "npx.cmd tsx app/scripts/push-update.ts",
+    { stdio: "inherit" }
   );
 
-  console.log("");
   console.log(
     "✅ Synchronisation terminée"
   );
-  console.log("");
 
-} catch (error) {
+} catch {
 
   console.error(
-    "❌ Erreur pendant la synchronisation"
+    "❌ Erreur de synchronisation"
   );
 
-  process.exit(1);
 }

@@ -6,7 +6,7 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "eslint"
+    "sync-all": "tsx app/scripts/sync-all.ts"
   },
   "dependencies": {
     "next": "16.4.3",

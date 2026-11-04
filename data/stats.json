@@ -2233,7 +2233,7 @@
     "totalRuntimeMinutes": 591.9276333333333
   },
   {
-    "pilote": "JGS S35-4E EVO",
+    "pilote": "Spare 1",
     "transpondeur": "9503249",
     "year": 2024,
     "sessions": 7,
@@ -3707,7 +3707,7 @@
     "totalRuntimeMinutes": 30.912683333333337
   },
   {
-    "pilote": "JGS S35-4E EVO",
+    "pilote": "Spare 1",
     "transpondeur": "9503249",
     "year": 2025,
     "sessions": 10,
@@ -6391,7 +6391,7 @@
     "totalRuntimeMinutes": 24.792333333333332
   },
   {
-    "pilote": "PUCE SPARE 2",
+    "pilote": "JGS S35-5E",
     "transpondeur": "7437087",
     "year": 2025,
     "sessions": 10,
@@ -6457,7 +6457,7 @@
     "totalRuntimeMinutes": 105.5115333333333
   },
   {
-    "pilote": "JGS S35-4E EVO",
+    "pilote": "Spare 1",
     "transpondeur": "9503249",
     "year": 2023,
     "sessions": 12,
@@ -6655,7 +6655,7 @@
     "totalRuntimeMinutes": 127.08543333333333
   },
   {
-    "pilote": "JGS S35-4E EVO",
+    "pilote": "Spare 1",
     "transpondeur": "9503249",
     "year": 2026,
     "sessions": 6,
@@ -7458,7 +7458,7 @@
     "totalRuntimeMinutes": 237.55595
   },
   {
-    "pilote": "PUCE SPARE 2",
+    "pilote": "JGS S35-5E",
     "transpondeur": "7437087",
     "year": 2024,
     "sessions": 6,
@@ -7601,7 +7601,7 @@
     "totalRuntimeMinutes": 25.11406666666666
   },
   {
-    "pilote": "PUCE SPARE 2",
+    "pilote": "JGS S35-5E",
     "transpondeur": "7437087",
     "year": 2023,
     "sessions": 22,
@@ -8019,7 +8019,7 @@
     "totalRuntimeMinutes": 61.629133333333314
   },
   {
-    "pilote": "PUCE SPARE 2",
+    "pilote": "JGS S35-5E",
     "transpondeur": "7437087",
     "year": 2026,
     "sessions": 3,
@@ -9163,7 +9163,7 @@
     "totalRuntimeMinutes": 385.93698333333333
   },
   {
-    "pilote": "Clément Barnier",
+    "pilote": "Clément B.",
     "transpondeur": "5876900",
     "year": 2022,
     "sessions": 2,
@@ -9438,7 +9438,7 @@
     "totalRuntimeMinutes": 164.4303833333333
   },
   {
-    "pilote": "Ivan Barnier",
+    "pilote": "Ivan B1",
     "transpondeur": "2315442",
     "year": 2026,
     "sessions": 2,
@@ -9625,7 +9625,7 @@
     "totalRuntimeMinutes": 101.17788333333334
   },
   {
-    "pilote": "Clément Barnier",
+    "pilote": "Clément B.",
     "transpondeur": "5876900",
     "year": 2026,
     "sessions": 4,
@@ -10670,7 +10670,7 @@
     "totalRuntimeMinutes": 81.26525000000001
   },
   {
-    "pilote": "Ivan Barnier",
+    "pilote": "Ivan B1",
     "transpondeur": "2315442",
     "year": 2024,
     "sessions": 6,
@@ -10956,7 +10956,7 @@
     "totalRuntimeMinutes": 177.46860000000004
   },
   {
-    "pilote": "Clément Barnier",
+    "pilote": "Clément B.",
     "transpondeur": "5876900",
     "year": 2024,
     "sessions": 7,
@@ -12694,7 +12694,7 @@
     "totalRuntimeMinutes": 138.36456666666666
   },
   {
-    "pilote": "Ivan Barnier",
+    "pilote": "Ivan B1",
     "transpondeur": "2315442",
     "year": 2023,
     "sessions": 1,
@@ -13530,7 +13530,7 @@
     "totalRuntimeMinutes": 82.12026666666665
   },
   {
-    "pilote": "PUCE SPARE 2",
+    "pilote": "JGS S35-5E",
     "transpondeur": "7437087",
     "year": 2022,
     "sessions": 2,
@@ -13772,7 +13772,7 @@
     "totalRuntimeMinutes": 38.554516666666665
   },
   {
-    "pilote": "Clément Barnier",
+    "pilote": "Clément B.",
     "transpondeur": "5876900",
     "year": 2025,
     "sessions": 2,
