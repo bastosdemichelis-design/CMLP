@@ -35,6 +35,21 @@ export default function HallOfFame() {
       )
       .slice(0, 3);
 
+  const podium3Tours =
+    [...filteredStats]
+      .filter(
+        (p: any) =>
+          p.best3Consecutive &&
+          p.best3Consecutive <
+            Number.MAX_VALUE
+      )
+      .sort(
+        (a: any, b: any) =>
+          a.best3Consecutive -
+          b.best3Consecutive
+      )
+      .slice(0, 3);
+
   const podiumTours =
     [...filteredStats]
       .sort(
@@ -47,7 +62,8 @@ export default function HallOfFame() {
     [...filteredStats]
       .sort(
         (a: any, b: any) =>
-          b.maxSpeed - a.maxSpeed
+          b.maxSpeed -
+          a.maxSpeed
       )
       .slice(0, 3);
 
@@ -136,8 +152,7 @@ export default function HallOfFame() {
             <div
               style={{
                 marginTop: "5px",
-                fontSize:
-                  "20px",
+                fontSize: "20px",
               }}
             >
               {valueFormatter(
@@ -222,6 +237,18 @@ export default function HallOfFame() {
               3
             )} s`,
           "bestLap"
+        )}
+
+        {podiumCard(
+          "🎯 Meilleurs 3 tours consécutifs",
+          podium3Tours,
+          (
+            value
+          ) =>
+            `${value.toFixed(
+              3
+            )} s`,
+          "best3Consecutive"
         )}
 
         {podiumCard(

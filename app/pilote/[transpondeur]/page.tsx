@@ -53,6 +53,15 @@ export default async function Page({
       )
     );
 
+  const best3Consecutive =
+    Math.min(
+      ...piloteStats.map(
+        (p: any) =>
+          p.best3Consecutive ??
+          Number.MAX_VALUE
+      )
+    );
+
   const maxSpeed =
     Math.max(
       ...piloteStats.map(
@@ -123,9 +132,7 @@ export default async function Page({
           color: "#c28b00",
         }}
       >
-        🏅 Rang général :
-        {" "}
-        #{rangGeneral}
+        🏅 Rang général : #{rangGeneral}
       </p>
 
       <div
@@ -165,6 +172,19 @@ export default async function Page({
 
           <h2>
             {bestLap.toFixed(3)} s
+          </h2>
+        </div>
+
+        <div>
+          <h3>
+            🎯 Meilleure moyenne
+            3 tours
+          </h3>
+
+          <h2>
+            {best3Consecutive.toFixed(
+              3
+            )} s
           </h2>
         </div>
 
@@ -241,6 +261,15 @@ export default async function Page({
               }}
             >
               Meilleur tour
+            </th>
+
+            <th
+              style={{
+                textAlign: "left",
+                padding: "12px",
+              }}
+            >
+              3 tours
             </th>
 
             <th
@@ -337,6 +366,16 @@ export default async function Page({
                       }}
                     >
                       {yearStat.bestLap.toFixed(
+                        3
+                      )} s
+                    </td>
+
+                    <td
+                      style={{
+                        padding: "12px",
+                      }}
+                    >
+                      {yearStat.best3Consecutive?.toFixed(
                         3
                       )} s
                     </td>

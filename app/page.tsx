@@ -94,6 +94,20 @@ export default function Home() {
         b.laps - a.laps
     )[0];
 
+  const meilleur3Tours =
+    [...filteredStats]
+      .filter(
+        (p: any) =>
+          p.best3Consecutive &&
+          p.best3Consecutive <
+            Number.MAX_VALUE
+      )
+      .sort(
+        (a: any, b: any) =>
+          a.best3Consecutive -
+          b.best3Consecutive
+      )[0];
+
   return (
     <main
       style={{
@@ -101,14 +115,11 @@ export default function Home() {
       }}
     >
       <h1>
-        🏁 CMLP
-        Performance
-        Center
+        🏁 CMLP Performance Center
       </h1>
 
       <p>
-        Statistiques
-        issues de
+        Statistiques issues de
         Speedhive
       </p>
 
@@ -119,19 +130,15 @@ export default function Home() {
           fontSize: "14px",
         }}
       >
-        🕒 Dernière
-        synchronisation :
+        🕒 Dernière synchronisation :
         {" "}
-        {
-          formattedSyncDate
-        }
+        {formattedSyncDate}
       </p>
 
       <div
         style={{
           marginTop: "20px",
-          marginBottom:
-            "30px",
+          marginBottom: "30px",
         }}
       >
         <label>
@@ -148,14 +155,12 @@ export default function Home() {
             )
           }
           style={{
-            marginLeft:
-              "10px",
+            marginLeft: "10px",
             padding: "8px",
           }}
         >
           <option value="Toutes">
-            Toutes les
-            années
+            Toutes les années
           </option>
 
           {years.map(
@@ -164,9 +169,7 @@ export default function Home() {
             ) => (
               <option
                 key={year}
-                value={
-                  year
-                }
+                value={year}
               >
                 {year}
               </option>
@@ -194,15 +197,13 @@ export default function Home() {
           }}
         >
           <h3>
-            🏆 Record
-            absolu
+            🏆 Record absolu
           </h3>
 
           <h2>
             {recordAbsolu?.bestLap.toFixed(
               3
-            )}{" "}
-            s
+            )} s
           </h2>
 
           <p>
@@ -235,14 +236,50 @@ export default function Home() {
           }}
         >
           <h3>
-            👥 Nombre
-            de pilotes
+            🎯 Record 3 tours
           </h3>
 
           <h2>
+            {meilleur3Tours?.best3Consecutive.toFixed(
+              3
+            )} s
+          </h2>
+
+          <p>
+            <Link
+              href={`/pilote/${meilleur3Tours?.transpondeur}`}
+            >
+              {
+                meilleur3Tours?.pilote
+              }
+            </Link>
+          </p>
+
+          <small>
+            Année :
+            {" "}
             {
-              nombrePilotes
+              meilleur3Tours?.year
             }
+          </small>
+        </div>
+
+        <div
+          style={{
+            border:
+              "1px solid #ddd",
+            borderRadius:
+              "10px",
+            padding:
+              "20px",
+          }}
+        >
+          <h3>
+            👥 Nombre de pilotes
+          </h3>
+
+          <h2>
+            {nombrePilotes}
           </h2>
         </div>
 
@@ -257,8 +294,7 @@ export default function Home() {
           }}
         >
           <h3>
-            📅 Nombre
-            de sessions
+            📅 Nombre de sessions
           </h3>
 
           <h2>
@@ -277,9 +313,7 @@ export default function Home() {
           }}
         >
           <h3>
-            🔄 Nombre
-            total de
-            tours
+            🔄 Nombre total de tours
           </h3>
 
           <h2>
@@ -298,13 +332,11 @@ export default function Home() {
           }}
         >
           <h3>
-            🔥 Plus gros
-            rouleur
+            🔥 Plus gros rouleur
           </h3>
 
           <h2>
-            {plusGrosRouleur?.laps.toLocaleString()}{" "}
-            tours
+            {plusGrosRouleur?.laps.toLocaleString()} tours
           </h2>
 
           <p>
@@ -337,15 +369,13 @@ export default function Home() {
           }}
         >
           <h3>
-            🚀 Vitesse
-            maximale
+            🚀 Vitesse maximale
           </h3>
 
           <h2>
             {vitesseMax?.maxSpeed.toFixed(
               3
-            )}{" "}
-            km/h
+            )} km/h
           </h2>
 
           <p>
@@ -370,20 +400,17 @@ export default function Home() {
 
       <div
         style={{
-          marginTop:
-            "50px",
+          marginTop: "50px",
         }}
       >
         <h2>
-          🏆 Top 10
-          Pilotes
+          🏆 Top 10 Pilotes
         </h2>
 
         <table
           style={{
             width: "100%",
-            marginTop:
-              "20px",
+            marginTop: "20px",
             borderCollapse:
               "collapse",
           }}
@@ -395,59 +422,23 @@ export default function Home() {
                   "2px solid #ddd",
               }}
             >
-              <th
-                style={{
-                  textAlign:
-                    "left",
-                  padding:
-                    "12px",
-                }}
-              >
+              <th style={{ textAlign: "left", padding: "12px" }}>
                 Rang
               </th>
 
-              <th
-                style={{
-                  textAlign:
-                    "left",
-                  padding:
-                    "12px",
-                }}
-              >
+              <th style={{ textAlign: "left", padding: "12px" }}>
                 Pilote
               </th>
 
-              <th
-                style={{
-                  textAlign:
-                    "left",
-                  padding:
-                    "12px",
-                }}
-              >
+              <th style={{ textAlign: "left", padding: "12px" }}>
                 Année
               </th>
 
-              <th
-                style={{
-                  textAlign:
-                    "left",
-                  padding:
-                    "12px",
-                }}
-              >
-                Meilleur
-                Tour
+              <th style={{ textAlign: "left", padding: "12px" }}>
+                Meilleur tour
               </th>
 
-              <th
-                style={{
-                  textAlign:
-                    "left",
-                  padding:
-                    "12px",
-                }}
-              >
+              <th style={{ textAlign: "left", padding: "12px" }}>
                 Sessions
               </th>
             </tr>
@@ -455,10 +446,7 @@ export default function Home() {
 
           <tbody>
             {filteredStats
-              .slice(
-                0,
-                10
-              )
+              .slice(0, 10)
               .map(
                 (
                   pilote: any,
@@ -477,10 +465,7 @@ export default function Home() {
                           "12px",
                       }}
                     >
-                      {
-                        index +
-                        1
-                      }
+                      {index + 1}
                     </td>
 
                     <td
@@ -517,8 +502,7 @@ export default function Home() {
                     >
                       {pilote.bestLap.toFixed(
                         3
-                      )}{" "}
-                      s
+                      )} s
                     </td>
 
                     <td
