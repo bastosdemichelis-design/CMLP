@@ -28,12 +28,19 @@ for (const activity of activities) {
 
   let laps = 0;
   let bestLap = Number.MAX_VALUE;
+  let best3Consecutive =
+    Number.MAX_VALUE;
   let maxSpeed = 0;
   let lapSum = 0;
 
+  const lapTimes: number[] =
+    [];
+
   for (const line of lines) {
 
-    if (!line.includes("km/h"))
+    if (
+      !line.includes("km/h")
+    )
       continue;
 
     const cols =
@@ -67,6 +74,8 @@ for (const activity of activities) {
           timeMatch[1]
         );
 
+      lapTimes.push(sec);
+
       lapSum += sec;
 
       if (sec < bestLap) {
@@ -81,14 +90,47 @@ for (const activity of activities) {
           speedMatch[1]
         );
 
-      if (kmh > maxSpeed) {
+      if (
+        kmh > maxSpeed
+      ) {
         maxSpeed = kmh;
       }
     }
   }
 
+  // Calcul meilleur 3 tours consécutifs
+
+  if (
+    lapTimes.length >= 3
+  ) {
+
+    for (
+      let i = 0;
+      i <=
+      lapTimes.length - 3;
+      i++
+    ) {
+
+      const avg =
+        (
+          lapTimes[i] +
+          lapTimes[i + 1] +
+          lapTimes[i + 2]
+        ) / 3;
+
+      if (
+        avg <
+        best3Consecutive
+      ) {
+        best3Consecutive =
+          avg;
+      }
+    }
+  }
+
   const pilote =
-    activity.chipLabel || "Inconnu";
+    activity.chipLabel ||
+    "Inconnu";
 
   const year =
     new Date(
@@ -116,11 +158,14 @@ for (const activity of activities) {
       bestLap:
         Number.MAX_VALUE,
 
+      best3Consecutive:
+        Number.MAX_VALUE,
+
       maxSpeed: 0,
 
       averageLap: 0,
 
-      totalRuntimeMinutes: 0
+      totalRuntimeMinutes: 0,
     };
   }
 
@@ -131,25 +176,27 @@ for (const activity of activities) {
   drivers[key].totalRuntimeMinutes +=
     lapSum / 60;
 
-  if (
-    laps > 0
-  ) {
+  if (laps > 0) {
 
     const currentAverage =
       lapSum / laps;
 
     if (
-      drivers[key].averageLap === 0
+      drivers[key]
+        .averageLap === 0
     ) {
 
-      drivers[key].averageLap =
+      drivers[key]
+        .averageLap =
         currentAverage;
 
     } else {
 
-      drivers[key].averageLap =
+      drivers[key]
+        .averageLap =
         (
-          drivers[key].averageLap +
+          drivers[key]
+            .averageLap +
           currentAverage
         ) / 2;
     }
@@ -165,6 +212,17 @@ for (const activity of activities) {
   }
 
   if (
+    best3Consecutive <
+    drivers[key]
+      .best3Consecutive
+  ) {
+
+    drivers[key]
+      .best3Consecutive =
+      best3Consecutive;
+  }
+
+  if (
     maxSpeed >
     drivers[key].maxSpeed
   ) {
@@ -177,8 +235,12 @@ for (const activity of activities) {
 const stats =
   Object.values(drivers)
     .sort(
-      (a: any, b: any) =>
-        a.bestLap - b.bestLap
+      (
+        a: any,
+        b: any
+      ) =>
+        a.bestLap -
+        b.bestLap
     );
 
 fs.writeFileSync(
