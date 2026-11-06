@@ -1,4 +1,6 @@
 import stats from "../../../data/stats.json";
+import sessionsSummary from "../../../data/sessions-summary.json";
+
 import Link from "next/link";
 import { notFound } from "next/navigation";
 
@@ -26,6 +28,27 @@ export default async function Page({
     notFound();
   }
 
+  const piloteSessions =
+    sessionsSummary
+      .filter(
+        (session: any) =>
+          String(
+            session.transpondeur
+          ) === transpondeur
+      )
+      .sort(
+        (
+          a: any,
+          b: any
+        ) =>
+          new Date(
+            b.date
+          ).getTime() -
+          new Date(
+            a.date
+          ).getTime()
+      );
+
   const latest =
     [...piloteStats].sort(
       (a: any, b: any) =>
@@ -49,7 +72,8 @@ export default async function Page({
   const bestLap =
     Math.min(
       ...piloteStats.map(
-        (p: any) => p.bestLap
+        (p: any) =>
+          p.bestLap
       )
     );
 
@@ -65,14 +89,16 @@ export default async function Page({
   const maxSpeed =
     Math.max(
       ...piloteStats.map(
-        (p: any) => p.maxSpeed
+        (p: any) =>
+          p.maxSpeed
       )
     );
 
   const classementGeneral =
     [...stats].sort(
       (a: any, b: any) =>
-        a.bestLap - b.bestLap
+        a.bestLap -
+        b.bestLap
     );
 
   const rangGeneral =
@@ -121,18 +147,23 @@ export default async function Page({
       </h1>
 
       <p>
-        Transpondeur :{" "}
+        Transpondeur :
+        {" "}
         {transpondeur}
       </p>
 
       <p
         style={{
           fontSize: "20px",
-          fontWeight: "bold",
-          color: "#c28b00",
+          fontWeight:
+            "bold",
+          color:
+            "#c28b00",
         }}
       >
-        🏅 Rang général : #{rangGeneral}
+        🏅 Rang général :
+        {" "}
+        #{rangGeneral}
       </p>
 
       <div
@@ -171,7 +202,9 @@ export default async function Page({
           </h3>
 
           <h2>
-            {bestLap.toFixed(3)} s
+            {bestLap.toFixed(
+              3
+            )} s
           </h2>
         </div>
 
@@ -194,7 +227,9 @@ export default async function Page({
           </h3>
 
           <h2>
-            {maxSpeed.toFixed(3)} km/h
+            {maxSpeed.toFixed(
+              3
+            )} km/h
           </h2>
         </div>
       </div>
@@ -207,8 +242,8 @@ export default async function Page({
         style={{
           width: "100%",
           marginTop: "20px",
-          borderCollapse: "collapse",
-          tableLayout: "fixed",
+          borderCollapse:
+            "collapse",
         }}
       >
         <thead>
@@ -218,68 +253,13 @@ export default async function Page({
                 "2px solid #ddd",
             }}
           >
-            <th
-              style={{
-                textAlign: "left",
-                padding: "12px",
-              }}
-            >
-              Année
-            </th>
-
-            <th
-              style={{
-                textAlign: "left",
-                padding: "12px",
-              }}
-            >
-              Rang
-            </th>
-
-            <th
-              style={{
-                textAlign: "left",
-                padding: "12px",
-              }}
-            >
-              Sessions
-            </th>
-
-            <th
-              style={{
-                textAlign: "left",
-                padding: "12px",
-              }}
-            >
-              Tours
-            </th>
-
-            <th
-              style={{
-                textAlign: "left",
-                padding: "12px",
-              }}
-            >
-              Meilleur tour
-            </th>
-
-            <th
-              style={{
-                textAlign: "left",
-                padding: "12px",
-              }}
-            >
-              3 tours
-            </th>
-
-            <th
-              style={{
-                textAlign: "left",
-                padding: "12px",
-              }}
-            >
-              Vitesse max
-            </th>
+            <th>Année</th>
+            <th>Rang</th>
+            <th>Sessions</th>
+            <th>Tours</th>
+            <th>Record</th>
+            <th>3 tours</th>
+            <th>Vitesse</th>
           </tr>
         </thead>
 
@@ -296,7 +276,9 @@ export default async function Page({
                 const classementAnnee =
                   stats
                     .filter(
-                      (p: any) =>
+                      (
+                        p: any
+                      ) =>
                         p.year ===
                         yearStat.year
                     )
@@ -318,73 +300,45 @@ export default async function Page({
 
                 return (
                   <tr
-                    key={yearStat.year}
-                    style={{
-                      borderBottom:
-                        "1px solid #eee",
-                    }}
+                    key={
+                      yearStat.year
+                    }
                   >
-                    <td
-                      style={{
-                        padding: "12px",
-                      }}
-                    >
-                      {yearStat.year}
+                    <td>
+                      {
+                        yearStat.year
+                      }
                     </td>
 
-                    <td
-                      style={{
-                        padding: "12px",
-                        fontWeight:
-                          "bold",
-                      }}
-                    >
+                    <td>
                       {getMedal(
                         rangAnnee
                       )}
                     </td>
 
-                    <td
-                      style={{
-                        padding: "12px",
-                      }}
-                    >
-                      {yearStat.sessions}
+                    <td>
+                      {
+                        yearStat.sessions
+                      }
                     </td>
 
-                    <td
-                      style={{
-                        padding: "12px",
-                      }}
-                    >
+                    <td>
                       {yearStat.laps.toLocaleString()}
                     </td>
 
-                    <td
-                      style={{
-                        padding: "12px",
-                      }}
-                    >
+                    <td>
                       {yearStat.bestLap.toFixed(
                         3
                       )} s
                     </td>
 
-                    <td
-                      style={{
-                        padding: "12px",
-                      }}
-                    >
+                    <td>
                       {yearStat.best3Consecutive?.toFixed(
                         3
                       )} s
                     </td>
 
-                    <td
-                      style={{
-                        padding: "12px",
-                      }}
-                    >
+                    <td>
                       {yearStat.maxSpeed.toFixed(
                         3
                       )} km/h
@@ -393,6 +347,98 @@ export default async function Page({
                 );
               }
             )}
+        </tbody>
+      </table>
+
+      <h2
+        style={{
+          marginTop: "50px",
+          marginBottom:
+            "20px",
+        }}
+      >
+        📋 Historique des sessions
+      </h2>
+
+      <table
+        style={{
+          width: "100%",
+          borderCollapse:
+            "collapse",
+        }}
+      >
+        <thead>
+          <tr
+            style={{
+              borderBottom:
+                "2px solid #ddd",
+            }}
+          >
+            <th>Date</th>
+            <th>Tours</th>
+            <th>Record</th>
+            <th>3 tours</th>
+            <th>Vitesse</th>
+            <th></th>
+          </tr>
+        </thead>
+
+        <tbody>
+          {piloteSessions.map(
+            (
+              session: any
+            ) => (
+              <tr
+                key={
+                  session.id
+                }
+                style={{
+                  borderBottom:
+                    "1px solid #eee",
+                }}
+              >
+                <td>
+                  {new Date(
+                    session.date
+                  ).toLocaleDateString(
+                    "fr-FR"
+                  )}
+                </td>
+
+                <td>
+                  {
+                    session.laps
+                  }
+                </td>
+
+                <td>
+                  {session.bestLap.toFixed(
+                    3
+                  )} s
+                </td>
+
+                <td>
+                  {session.best3Consecutive.toFixed(
+                    3
+                  )} s
+                </td>
+
+                <td>
+                  {session.maxSpeed.toFixed(
+                    3
+                  )} km/h
+                </td>
+
+                <td>
+                  <Link
+                    href={`/session/${session.id}`}
+                  >
+                    🔍 Voir
+                  </Link>
+                </td>
+              </tr>
+            )
+          )}
         </tbody>
       </table>
     </main>
