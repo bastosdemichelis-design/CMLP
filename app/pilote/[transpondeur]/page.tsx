@@ -4,6 +4,8 @@ import sessionsSummary from "../../../data/sessions-summary.json";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 
+import PiloteSessions from "../../components/PiloteSessions";
+
 export default async function Page({
   params,
 }: {
@@ -57,14 +59,21 @@ export default async function Page({
 
   const totalSessions =
     piloteStats.reduce(
-      (sum: number, p: any) =>
-        sum + p.sessions,
+      (
+        sum: number,
+        p: any
+      ) =>
+        sum +
+        p.sessions,
       0
     );
 
   const totalLaps =
     piloteStats.reduce(
-      (sum: number, p: any) =>
+      (
+        sum: number,
+        p: any
+      ) =>
         sum + p.laps,
       0
     );
@@ -132,7 +141,8 @@ export default async function Page({
       <Link
         href="/classement"
         style={{
-          textDecoration: "none",
+          textDecoration:
+            "none",
         }}
       >
         ← Retour au classement
@@ -173,7 +183,8 @@ export default async function Page({
             "repeat(auto-fit,minmax(220px,1fr))",
           gap: "20px",
           marginTop: "30px",
-          marginBottom: "50px",
+          marginBottom:
+            "50px",
         }}
       >
         <div>
@@ -241,7 +252,8 @@ export default async function Page({
       <table
         style={{
           width: "100%",
-          marginTop: "20px",
+          marginTop:
+            "20px",
           borderCollapse:
             "collapse",
         }}
@@ -266,8 +278,12 @@ export default async function Page({
         <tbody>
           {piloteStats
             .sort(
-              (a: any, b: any) =>
-                b.year - a.year
+              (
+                a: any,
+                b: any
+              ) =>
+                b.year -
+                a.year
             )
             .map(
               (
@@ -293,7 +309,9 @@ export default async function Page({
 
                 const rangAnnee =
                   classementAnnee.findIndex(
-                    (p: any) =>
+                    (
+                      p: any
+                    ) =>
                       p.transpondeur ===
                       yearStat.transpondeur
                   ) + 1;
@@ -329,19 +347,22 @@ export default async function Page({
                     <td>
                       {yearStat.bestLap.toFixed(
                         3
-                      )} s
+                      )}
+                      {" "}s
                     </td>
 
                     <td>
                       {yearStat.best3Consecutive?.toFixed(
                         3
-                      )} s
+                      )}
+                      {" "}s
                     </td>
 
                     <td>
                       {yearStat.maxSpeed.toFixed(
                         3
-                      )} km/h
+                      )}
+                      {" "}km/h
                     </td>
                   </tr>
                 );
@@ -350,97 +371,9 @@ export default async function Page({
         </tbody>
       </table>
 
-      <h2
-        style={{
-          marginTop: "50px",
-          marginBottom:
-            "20px",
-        }}
-      >
-        📋 Historique des sessions
-      </h2>
-
-      <table
-        style={{
-          width: "100%",
-          borderCollapse:
-            "collapse",
-        }}
-      >
-        <thead>
-          <tr
-            style={{
-              borderBottom:
-                "2px solid #ddd",
-            }}
-          >
-            <th>Date</th>
-            <th>Tours</th>
-            <th>Record</th>
-            <th>3 tours</th>
-            <th>Vitesse</th>
-            <th></th>
-          </tr>
-        </thead>
-
-        <tbody>
-          {piloteSessions.map(
-            (
-              session: any
-            ) => (
-              <tr
-                key={
-                  session.id
-                }
-                style={{
-                  borderBottom:
-                    "1px solid #eee",
-                }}
-              >
-                <td>
-                  {new Date(
-                    session.date
-                  ).toLocaleDateString(
-                    "fr-FR"
-                  )}
-                </td>
-
-                <td>
-                  {
-                    session.laps
-                  }
-                </td>
-
-                <td>
-                  {session.bestLap.toFixed(
-                    3
-                  )} s
-                </td>
-
-                <td>
-                  {session.best3Consecutive.toFixed(
-                    3
-                  )} s
-                </td>
-
-                <td>
-                  {session.maxSpeed.toFixed(
-                    3
-                  )} km/h
-                </td>
-
-                <td>
-                  <Link
-                    href={`/session/${session.id}`}
-                  >
-                    🔍 Voir
-                  </Link>
-                </td>
-              </tr>
-            )
-          )}
-        </tbody>
-      </table>
+      <PiloteSessions
+        sessions={piloteSessions}
+      />
     </main>
   );
 }
