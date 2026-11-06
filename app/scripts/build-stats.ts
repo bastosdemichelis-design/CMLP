@@ -8,6 +8,7 @@ const activities = JSON.parse(
 );
 
 const drivers: any = {};
+const sessionsSummary: any[] = [];
 
 for (const activity of activities) {
 
@@ -33,14 +34,11 @@ for (const activity of activities) {
   let maxSpeed = 0;
   let lapSum = 0;
 
-  const lapTimes: number[] =
-    [];
+  const lapTimes: number[] = [];
 
   for (const line of lines) {
 
-    if (
-      !line.includes("km/h")
-    )
+    if (!line.includes("km/h"))
       continue;
 
     const cols =
@@ -90,15 +88,13 @@ for (const activity of activities) {
           speedMatch[1]
         );
 
-      if (
-        kmh > maxSpeed
-      ) {
+      if (kmh > maxSpeed) {
         maxSpeed = kmh;
       }
     }
   }
 
-  // Calcul meilleur 3 tours consécutifs
+  // Calcul du meilleur 3 tours consécutifs
 
   if (
     lapTimes.length >= 3
@@ -106,8 +102,7 @@ for (const activity of activities) {
 
     for (
       let i = 0;
-      i <=
-      lapTimes.length - 3;
+      i <= lapTimes.length - 3;
       i++
     ) {
 
@@ -206,7 +201,6 @@ for (const activity of activities) {
     bestLap <
     drivers[key].bestLap
   ) {
-
     drivers[key].bestLap =
       bestLap;
   }
@@ -216,7 +210,6 @@ for (const activity of activities) {
     drivers[key]
       .best3Consecutive
   ) {
-
     drivers[key]
       .best3Consecutive =
       best3Consecutive;
@@ -226,19 +219,39 @@ for (const activity of activities) {
     maxSpeed >
     drivers[key].maxSpeed
   ) {
-
     drivers[key].maxSpeed =
       maxSpeed;
   }
+
+  // sessions-summary.json
+
+  sessionsSummary.push({
+    id: activity.id,
+
+    pilote,
+
+    transpondeur:
+      activity.chipCode,
+
+    date:
+      activity.startTime,
+
+    year,
+
+    laps,
+
+    bestLap,
+
+    best3Consecutive,
+
+    maxSpeed,
+  });
 }
 
 const stats =
   Object.values(drivers)
     .sort(
-      (
-        a: any,
-        b: any
-      ) =>
+      (a: any, b: any) =>
         a.bestLap -
         b.bestLap
     );
@@ -252,6 +265,30 @@ fs.writeFileSync(
   )
 );
 
+fs.writeFileSync(
+  "./data/sessions-summary.json",
+  JSON.stringify(
+    sessionsSummary.sort(
+      (
+        a: any,
+        b: any
+      ) =>
+        new Date(
+          b.date
+        ).getTime() -
+        new Date(
+          a.date
+        ).getTime()
+    ),
+    null,
+    2
+  )
+);
+
 console.log(
   `${stats.length} statistiques générées`
+);
+
+console.log(
+  `${sessionsSummary.length} sessions indexées`
 );
