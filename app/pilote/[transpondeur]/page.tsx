@@ -133,11 +133,7 @@ export default async function Page({
   }
 
   return (
-    <main
-      style={{
-        padding: "30px",
-      }}
-    >
+    <main>
       <Link
         href="/classement"
         style={{
@@ -162,32 +158,33 @@ export default async function Page({
         {transpondeur}
       </p>
 
-      <p
+      <div
+        className="card"
         style={{
-          fontSize: "20px",
-          fontWeight:
-            "bold",
-          color:
-            "#c28b00",
+          marginTop: "20px",
+          marginBottom:
+            "20px",
+          textAlign: "center",
         }}
       >
-        🏅 Rang général :
-        {" "}
-        #{rangGeneral}
-      </p>
+        <h3>
+          🏅 Rang général
+        </h3>
+
+        <h2>
+          #{rangGeneral}
+        </h2>
+      </div>
 
       <div
+        className="stats-grid"
         style={{
-          display: "grid",
-          gridTemplateColumns:
-            "repeat(auto-fit,minmax(220px,1fr))",
-          gap: "20px",
           marginTop: "30px",
           marginBottom:
             "50px",
         }}
       >
-        <div>
+        <div className="card">
           <h3>
             📅 Sessions
           </h3>
@@ -197,7 +194,7 @@ export default async function Page({
           </h2>
         </div>
 
-        <div>
+        <div className="card">
           <h3>
             🔄 Tours
           </h3>
@@ -207,7 +204,7 @@ export default async function Page({
           </h2>
         </div>
 
-        <div>
+        <div className="card">
           <h3>
             🏆 Record personnel
           </h3>
@@ -215,11 +212,12 @@ export default async function Page({
           <h2>
             {bestLap.toFixed(
               3
-            )} s
+            )}{" "}
+            s
           </h2>
         </div>
 
-        <div>
+        <div className="card">
           <h3>
             🎯 Meilleure moyenne
             3 tours
@@ -228,11 +226,12 @@ export default async function Page({
           <h2>
             {best3Consecutive.toFixed(
               3
-            )} s
+            )}{" "}
+            s
           </h2>
         </div>
 
-        <div>
+        <div className="card">
           <h3>
             🚀 Vitesse max
           </h3>
@@ -240,7 +239,8 @@ export default async function Page({
           <h2>
             {maxSpeed.toFixed(
               3
-            )} km/h
+            )}{" "}
+            km/h
           </h2>
         </div>
       </div>
@@ -249,130 +249,150 @@ export default async function Page({
         📅 Historique annuel
       </h2>
 
-      <table
+      <div
         style={{
-          width: "100%",
+          overflowX:
+            "auto",
           marginTop:
             "20px",
-          borderCollapse:
-            "collapse",
         }}
       >
-        <thead>
-          <tr
-            style={{
-              borderBottom:
-                "2px solid #ddd",
-            }}
-          >
-            <th>Année</th>
-            <th>Rang</th>
-            <th>Sessions</th>
-            <th>Tours</th>
-            <th>Record</th>
-            <th>3 tours</th>
-            <th>Vitesse</th>
-          </tr>
-        </thead>
+        <table>
+          <thead>
+            <tr>
+              <th>Année</th>
+              <th>Rang</th>
+              <th>Sessions</th>
+              <th>Tours</th>
+              <th>Record</th>
+              <th>3 tours</th>
+              <th>Vitesse</th>
+            </tr>
+          </thead>
 
-        <tbody>
-          {piloteStats
-            .sort(
-              (
-                a: any,
-                b: any
-              ) =>
-                b.year -
-                a.year
-            )
-            .map(
-              (
-                yearStat: any
-              ) => {
-                const classementAnnee =
-                  stats
-                    .filter(
+          <tbody>
+            {piloteStats
+              .sort(
+                (
+                  a: any,
+                  b: any
+                ) =>
+                  b.year -
+                  a.year
+              )
+              .map(
+                (
+                  yearStat: any
+                ) => {
+                  const classementAnnee =
+                    stats
+                      .filter(
+                        (
+                          p: any
+                        ) =>
+                          p.year ===
+                          yearStat.year
+                      )
+                      .sort(
+                        (
+                          a: any,
+                          b: any
+                        ) =>
+                          a.bestLap -
+                          b.bestLap
+                      );
+
+                  const rangAnnee =
+                    classementAnnee.findIndex(
                       (
                         p: any
                       ) =>
-                        p.year ===
-                        yearStat.year
-                    )
-                    .sort(
-                      (
-                        a: any,
-                        b: any
-                      ) =>
-                        a.bestLap -
-                        b.bestLap
-                    );
+                        p.transpondeur ===
+                        yearStat.transpondeur
+                    ) + 1;
 
-                const rangAnnee =
-                  classementAnnee.findIndex(
-                    (
-                      p: any
-                    ) =>
-                      p.transpondeur ===
-                      yearStat.transpondeur
-                  ) + 1;
-
-                return (
-                  <tr
-                    key={
-                      yearStat.year
-                    }
-                  >
-                    <td>
-                      {
+                  return (
+                    <tr
+                      key={
                         yearStat.year
                       }
-                    </td>
+                    >
+                      <td>
+                        {
+                          yearStat.year
+                        }
+                      </td>
 
-                    <td>
-                      {getMedal(
-                        rangAnnee
-                      )}
-                    </td>
+                      <td>
+                        {getMedal(
+                          rangAnnee
+                        )}
+                      </td>
 
-                    <td>
-                      {
-                        yearStat.sessions
-                      }
-                    </td>
+                      <td>
+                        {
+                          yearStat.sessions
+                        }
+                      </td>
 
-                    <td>
-                      {yearStat.laps.toLocaleString()}
-                    </td>
+                      <td>
+                        {yearStat.laps.toLocaleString()}
+                      </td>
 
-                    <td>
-                      {yearStat.bestLap.toFixed(
-                        3
-                      )}
-                      {" "}s
-                    </td>
+                      <td>
+                        {yearStat.bestLap.toFixed(
+                          3
+                        )}{" "}
+                        s
+                      </td>
 
-                    <td>
-                      {yearStat.best3Consecutive?.toFixed(
-                        3
-                      )}
-                      {" "}s
-                    </td>
+                      <td>
+                        {yearStat.best3Consecutive?.toFixed(
+                          3
+                        )}{" "}
+                        s
+                      </td>
 
-                    <td>
-                      {yearStat.maxSpeed.toFixed(
-                        3
-                      )}
-                      {" "}km/h
-                    </td>
-                  </tr>
-                );
-              }
-            )}
-        </tbody>
-      </table>
+                      <td>
+                        {yearStat.maxSpeed.toFixed(
+                          3
+                        )}{" "}
+                        km/h
+                      </td>
+                    </tr>
+                  );
+                }
+              )}
+          </tbody>
+        </table>
+      </div>
+
+      <div
+        className="card"
+        style={{
+          marginTop: "30px",
+        }}
+      >
+        <h3>
+          📊 Sessions enregistrées
+        </h3>
+
+        <h2>
+          {piloteSessions.length}
+        </h2>
+
+        <p>
+          Cliquez sur une
+          session pour afficher
+          le détail tour par
+          tour.
+        </p>
+      </div>
 
       <PiloteSessions
-        sessions={piloteSessions}
+        sessions={
+          piloteSessions
+        }
       />
     </main>
   );
