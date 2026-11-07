@@ -6,6 +6,8 @@ import Link from "next/link";
 import stats from "../data/stats.json";
 import lastSync from "../data/last-sync.json";
 
+import PublicCounter from "./components/PublicCounter";
+
 export default function Home() {
   const years = [
     ...new Set(
@@ -127,6 +129,8 @@ export default function Home() {
         {" "}
         {formattedSyncDate}
       </p>
+
+      <PublicCounter />
 
       <div className="filters">
         <select

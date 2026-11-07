@@ -2799,13 +2799,13 @@
     "pilote": "gabriel gerard",
     "transpondeur": "4283420",
     "year": 2026,
-    "sessions": 32,
-    "laps": 1380,
+    "sessions": 33,
+    "laps": 1406,
     "bestLap": 31.661,
     "best3Consecutive": 35.37533333333334,
     "maxSpeed": 33.543,
-    "averageLap": 46.84405496400181,
-    "totalRuntimeMinutes": 1023.8249
+    "averageLap": 46.84405496310182,
+    "totalRuntimeMinutes": 1043.4343833333332
   },
   {
     "pilote": "9432887 [0]",
@@ -8326,6 +8326,18 @@
     "maxSpeed": 28.249,
     "averageLap": 41.04825454545454,
     "totalRuntimeMinutes": 75.25513333333332
+  },
+  {
+    "pilote": "Quentin xb8",
+    "transpondeur": "9783084",
+    "year": 2026,
+    "sessions": 1,
+    "laps": 38,
+    "bestLap": 37.596,
+    "best3Consecutive": 38.48833333333333,
+    "maxSpeed": 28.248,
+    "averageLap": 41.39242105263158,
+    "totalRuntimeMinutes": 26.215200000000003
   },
   {
     "pilote": "Tekno Eb48 2.2 Calap",
@@ -14076,6 +14088,18 @@
     "totalRuntimeMinutes": 30.760050000000003
   },
   {
+    "pilote": "JGS S35-5 NITRO",
+    "transpondeur": "6695382",
+    "year": 2026,
+    "sessions": 1,
+    "laps": 62,
+    "bestLap": 40.432,
+    "best3Consecutive": 41.157,
+    "maxSpeed": 26.266,
+    "averageLap": 44.72430645161292,
+    "totalRuntimeMinutes": 46.21511666666668
+  },
+  {
     "pilote": "8007706 [0]",
     "transpondeur": "8007706",
     "year": 2024,
@@ -18154,6 +18178,18 @@
     "maxSpeed": 18.501,
     "averageLap": 58.83625,
     "totalRuntimeMinutes": 3.9224166666666664
+  },
+  {
+    "pilote": "Frisquet Jeremy",
+    "transpondeur": "8132986",
+    "year": 2026,
+    "sessions": 1,
+    "laps": 0,
+    "bestLap": 1.7976931348623157e+308,
+    "best3Consecutive": 1.7976931348623157e+308,
+    "maxSpeed": 0,
+    "averageLap": 0,
+    "totalRuntimeMinutes": 0
   },
   {
     "pilote": "Bastos#2",

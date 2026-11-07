@@ -1,5 +1,49 @@
 [
   {
+    "id": 8582064888,
+    "pilote": "Quentin xb8",
+    "transpondeur": "9783084",
+    "date": "2026-11-07T15:17:37+01:00",
+    "year": 2026,
+    "laps": 38,
+    "bestLap": 37.596,
+    "best3Consecutive": 38.48833333333333,
+    "maxSpeed": 28.248
+  },
+  {
+    "id": 8581709157,
+    "pilote": "JGS S35-5 NITRO",
+    "transpondeur": "6695382",
+    "date": "2026-11-07T14:25:58+01:00",
+    "year": 2026,
+    "laps": 62,
+    "bestLap": 40.432,
+    "best3Consecutive": 41.157,
+    "maxSpeed": 26.266
+  },
+  {
+    "id": 8581698735,
+    "pilote": "Frisquet Jeremy",
+    "transpondeur": "8132986",
+    "date": "2026-11-07T14:24:12+01:00",
+    "year": 2026,
+    "laps": 0,
+    "bestLap": 1.7976931348623157e+308,
+    "best3Consecutive": 1.7976931348623157e+308,
+    "maxSpeed": 0
+  },
+  {
+    "id": 8581563390,
+    "pilote": "gabriel gerard",
+    "transpondeur": "4283420",
+    "date": "2026-11-07T14:01:11+01:00",
+    "year": 2026,
+    "laps": 26,
+    "bestLap": 41.2,
+    "best3Consecutive": 42.440333333333335,
+    "maxSpeed": 25.777
+  },
+  {
     "id": 8545346721,
     "pilote": "Hervé 2",
     "transpondeur": "5565278",
