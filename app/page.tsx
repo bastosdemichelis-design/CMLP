@@ -9,9 +9,7 @@ import lastSync from "../data/last-sync.json";
 export default function Home() {
   const years = [
     ...new Set(
-      stats.map(
-        (p: any) => p.year
-      )
+      stats.map((p: any) => p.year)
     ),
   ].sort(
     (a: any, b: any) => b - a
@@ -109,11 +107,7 @@ export default function Home() {
       )[0];
 
   return (
-    <main
-      style={{
-        padding: "30px",
-      }}
-    >
+    <main>
       <h1>
         🏁 CMLP Performance Center
       </h1>
@@ -125,7 +119,6 @@ export default function Home() {
 
       <p
         style={{
-          marginTop: "10px",
           color: "#666",
           fontSize: "14px",
         }}
@@ -135,38 +128,21 @@ export default function Home() {
         {formattedSyncDate}
       </p>
 
-      <div
-        style={{
-          marginTop: "20px",
-          marginBottom: "30px",
-        }}
-      >
-        <label>
-          📅 Année :
-        </label>
-
+      <div className="filters">
         <select
-          value={
-            selectedYear
-          }
+          value={selectedYear}
           onChange={(e) =>
             setSelectedYear(
               e.target.value
             )
           }
-          style={{
-            marginLeft: "10px",
-            padding: "8px",
-          }}
         >
           <option value="Toutes">
             Toutes les années
           </option>
 
           {years.map(
-            (
-              year: any
-            ) => (
+            (year: any) => (
               <option
                 key={year}
                 value={year}
@@ -178,24 +154,9 @@ export default function Home() {
         </select>
       </div>
 
-      <div
-        style={{
-          display: "grid",
-          gridTemplateColumns:
-            "repeat(auto-fit,minmax(250px,1fr))",
-          gap: "20px",
-        }}
-      >
-        <div
-          style={{
-            border:
-              "1px solid #ddd",
-            borderRadius:
-              "10px",
-            padding:
-              "20px",
-          }}
-        >
+      <div className="stats-grid">
+
+        <div className="card">
           <h3>
             🏆 Record absolu
           </h3>
@@ -210,31 +171,18 @@ export default function Home() {
             <Link
               href={`/pilote/${recordAbsolu?.transpondeur}`}
             >
-              {
-                recordAbsolu?.pilote
-              }
+              {recordAbsolu?.pilote}
             </Link>
           </p>
 
           <small>
             Année :
             {" "}
-            {
-              recordAbsolu?.year
-            }
+            {recordAbsolu?.year}
           </small>
         </div>
 
-        <div
-          style={{
-            border:
-              "1px solid #ddd",
-            borderRadius:
-              "10px",
-            padding:
-              "20px",
-          }}
-        >
+        <div className="card">
           <h3>
             🎯 Record 3 tours
           </h3>
@@ -249,33 +197,20 @@ export default function Home() {
             <Link
               href={`/pilote/${meilleur3Tours?.transpondeur}`}
             >
-              {
-                meilleur3Tours?.pilote
-              }
+              {meilleur3Tours?.pilote}
             </Link>
           </p>
 
           <small>
             Année :
             {" "}
-            {
-              meilleur3Tours?.year
-            }
+            {meilleur3Tours?.year}
           </small>
         </div>
 
-        <div
-          style={{
-            border:
-              "1px solid #ddd",
-            borderRadius:
-              "10px",
-            padding:
-              "20px",
-          }}
-        >
+        <div className="card">
           <h3>
-            👥 Nombre de pilotes
+            👥 Pilotes
           </h3>
 
           <h2>
@@ -283,18 +218,9 @@ export default function Home() {
           </h2>
         </div>
 
-        <div
-          style={{
-            border:
-              "1px solid #ddd",
-            borderRadius:
-              "10px",
-            padding:
-              "20px",
-          }}
-        >
+        <div className="card">
           <h3>
-            📅 Nombre de sessions
+            📅 Sessions
           </h3>
 
           <h2>
@@ -302,18 +228,9 @@ export default function Home() {
           </h2>
         </div>
 
-        <div
-          style={{
-            border:
-              "1px solid #ddd",
-            borderRadius:
-              "10px",
-            padding:
-              "20px",
-          }}
-        >
+        <div className="card">
           <h3>
-            🔄 Nombre total de tours
+            🔄 Tours
           </h3>
 
           <h2>
@@ -321,16 +238,7 @@ export default function Home() {
           </h2>
         </div>
 
-        <div
-          style={{
-            border:
-              "1px solid #ddd",
-            borderRadius:
-              "10px",
-            padding:
-              "20px",
-          }}
-        >
+        <div className="card">
           <h3>
             🔥 Plus gros rouleur
           </h3>
@@ -343,33 +251,14 @@ export default function Home() {
             <Link
               href={`/pilote/${plusGrosRouleur?.transpondeur}`}
             >
-              {
-                plusGrosRouleur?.pilote
-              }
+              {plusGrosRouleur?.pilote}
             </Link>
           </p>
-
-          <small>
-            Année :
-            {" "}
-            {
-              plusGrosRouleur?.year
-            }
-          </small>
         </div>
 
-        <div
-          style={{
-            border:
-              "1px solid #ddd",
-            borderRadius:
-              "10px",
-            padding:
-              "20px",
-          }}
-        >
+        <div className="card">
           <h3>
-            🚀 Vitesse maximale
+            🚀 Vitesse max
           </h3>
 
           <h2>
@@ -382,19 +271,9 @@ export default function Home() {
             <Link
               href={`/pilote/${vitesseMax?.transpondeur}`}
             >
-              {
-                vitesseMax?.pilote
-              }
+              {vitesseMax?.pilote}
             </Link>
           </p>
-
-          <small>
-            Année :
-            {" "}
-            {
-              vitesseMax?.year
-            }
-          </small>
         </div>
       </div>
 
@@ -407,119 +286,72 @@ export default function Home() {
           🏆 Top 10 Pilotes
         </h2>
 
-        <table
+        <div
           style={{
-            width: "100%",
-            marginTop: "20px",
-            borderCollapse:
-              "collapse",
+            overflowX:
+              "auto",
           }}
         >
-          <thead>
-            <tr
-              style={{
-                borderBottom:
-                  "2px solid #ddd",
-              }}
-            >
-              <th style={{ textAlign: "left", padding: "12px" }}>
-                Rang
-              </th>
+          <table>
+            <thead>
+              <tr>
+                <th>Rang</th>
+                <th>Pilote</th>
+                <th>Année</th>
+                <th>Meilleur tour</th>
+                <th>Sessions</th>
+              </tr>
+            </thead>
 
-              <th style={{ textAlign: "left", padding: "12px" }}>
-                Pilote
-              </th>
-
-              <th style={{ textAlign: "left", padding: "12px" }}>
-                Année
-              </th>
-
-              <th style={{ textAlign: "left", padding: "12px" }}>
-                Meilleur tour
-              </th>
-
-              <th style={{ textAlign: "left", padding: "12px" }}>
-                Sessions
-              </th>
-            </tr>
-          </thead>
-
-          <tbody>
-            {filteredStats
-              .slice(0, 10)
-              .map(
-                (
-                  pilote: any,
-                  index
-                ) => (
-                  <tr
-                    key={`${pilote.transpondeur}-${pilote.year}`}
-                    style={{
-                      borderBottom:
-                        "1px solid #eee",
-                    }}
-                  >
-                    <td
-                      style={{
-                        padding:
-                          "12px",
-                      }}
+            <tbody>
+              {filteredStats
+                .slice(0, 10)
+                .map(
+                  (
+                    pilote: any,
+                    index
+                  ) => (
+                    <tr
+                      key={`${pilote.transpondeur}-${pilote.year}`}
                     >
-                      {index + 1}
-                    </td>
+                      <td>
+                        {index + 1}
+                      </td>
 
-                    <td
-                      style={{
-                        padding:
-                          "12px",
-                      }}
-                    >
-                      <Link
-                        href={`/pilote/${pilote.transpondeur}`}
-                      >
+                      <td>
+                        <Link
+                          href={`/pilote/${pilote.transpondeur}`}
+                        >
+                          {
+                            pilote.pilote
+                          }
+                        </Link>
+                      </td>
+
+                      <td>
                         {
-                          pilote.pilote
+                          pilote.year
                         }
-                      </Link>
-                    </td>
+                      </td>
 
-                    <td
-                      style={{
-                        padding:
-                          "12px",
-                      }}
-                    >
-                      {
-                        pilote.year
-                      }
-                    </td>
+                      <td>
+                        {pilote.bestLap.toFixed(
+                          3
+                        )}{" "}
+                        s
+                      </td>
 
-                    <td
-                      style={{
-                        padding:
-                          "12px",
-                      }}
-                    >
-                      {pilote.bestLap.toFixed(
-                        3
-                      )} s
-                    </td>
-
-                    <td
-                      style={{
-                        padding:
-                          "12px",
-                      }}
-                    >
-                      {
-                        pilote.sessions
-                      }
-                    </td>
-                  </tr>
-                )
-              )}
-          </tbody>
-        </table>
+                      <td>
+                        {
+                          pilote.sessions
+                        }
+                      </td>
+                    </tr>
+                  )
+                )}
+            </tbody>
+          </table>
+        </div>
       </div>
     </main>
   );
