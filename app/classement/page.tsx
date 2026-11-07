@@ -2,10 +2,10 @@
 
 import { useState } from "react";
 import Link from "next/link";
+
 import stats from "../../data/stats.json";
 
 export default function Classement() {
-
   const years = [
     ...new Set(
       stats.map(
@@ -42,75 +42,51 @@ export default function Classement() {
     );
 
   return (
-    <main
-      style={{
-        padding: "30px",
-      }}
-    >
+    <main>
       <h1>
         🏆 Classement CMLP
       </h1>
 
-      <div
-        style={{
-          display: "flex",
-          gap: "20px",
-          marginTop: "20px",
-          marginBottom: "30px",
-          flexWrap: "wrap",
-        }}
-      >
+      <div className="filters">
 
-        <div>
-          <label>
-            📆 Année :
-          </label>
+        <select
+          value={
+            selectedYear
+          }
+          onChange={(e) =>
+            setSelectedYear(
+              e.target.value
+            )
+          }
+        >
+          <option value="Toutes">
+            Toutes les années
+          </option>
 
-          <select
-            value={selectedYear}
-            onChange={(e) =>
-              setSelectedYear(
-                e.target.value
-              )
-            }
-            style={{
-              marginLeft: "10px",
-              padding: "8px",
-            }}
-          >
-            <option value="Toutes">
-              Toutes les années
-            </option>
+          {years.map(
+            (
+              year: any
+            ) => (
+              <option
+                key={year}
+                value={year}
+              >
+                {year}
+              </option>
+            )
+          )}
+        </select>
 
-            {years.map(
-              (year: any) => (
-                <option
-                  key={year}
-                  value={year}
-                >
-                  {year}
-                </option>
-              )
-            )}
-          </select>
-        </div>
-
-        <div>
-          <input
-            type="text"
-            placeholder="🔎 Rechercher un pilote..."
-            value={search}
-            onChange={(e) =>
-              setSearch(
-                e.target.value
-              )
-            }
-            style={{
-              padding: "8px",
-              minWidth: "250px",
-            }}
-          />
-        </div>
+        <input
+          type="text"
+          placeholder="🔎 Rechercher un pilote..."
+          value={search}
+          onChange={(e) =>
+            setSearch(
+              e.target.value
+            )
+          }
+        />
 
       </div>
 
@@ -120,191 +96,90 @@ export default function Classement() {
         {filteredStats.length}
       </p>
 
-      <table
+      <div
         style={{
-          width: "100%",
-          borderCollapse:
-            "collapse",
-          marginTop: "20px",
+          overflowX:
+            "auto",
+          marginTop:
+            "20px",
         }}
       >
-        <thead>
+        <table>
+          <thead>
+            <tr>
+              <th>Rang</th>
+              <th>Pilote</th>
+              <th>Année</th>
+              <th>Sessions</th>
+              <th>Tours</th>
+              <th>Meilleur Tour</th>
+              <th>Vitesse max</th>
+            </tr>
+          </thead>
 
-          <tr
-            style={{
-              borderBottom:
-                "2px solid #ddd",
-            }}
-          >
+          <tbody>
 
-            <th
-              style={{
-                textAlign: "left",
-                padding: "12px",
-              }}
-            >
-              Rang
-            </th>
-
-            <th
-              style={{
-                textAlign: "left",
-                padding: "12px",
-              }}
-            >
-              Pilote
-            </th>
-
-            <th
-              style={{
-                textAlign: "left",
-                padding: "12px",
-              }}
-            >
-              Année
-            </th>
-
-            <th
-              style={{
-                textAlign: "left",
-                padding: "12px",
-              }}
-            >
-              Sessions
-            </th>
-
-            <th
-              style={{
-                textAlign: "left",
-                padding: "12px",
-              }}
-            >
-              Tours
-            </th>
-
-            <th
-              style={{
-                textAlign: "left",
-                padding: "12px",
-              }}
-            >
-              Meilleur Tour
-            </th>
-
-            <th
-              style={{
-                textAlign: "left",
-                padding: "12px",
-              }}
-            >
-              Vitesse max
-            </th>
-
-          </tr>
-
-        </thead>
-
-        <tbody>
-
-          {filteredStats.map(
-            (
-              pilote: any,
-              index
-            ) => (
-
-              <tr
-                key={
-                  pilote.transpondeur +
-                  "-" +
-                  pilote.year
-                }
-                style={{
-                  borderBottom:
-                    "1px solid #eee",
-                }}
-              >
-
-                <td
-                  style={{
-                    padding: "12px",
-                  }}
+            {filteredStats.map(
+              (
+                pilote: any,
+                index
+              ) => (
+                <tr
+                  key={`${pilote.transpondeur}-${pilote.year}`}
                 >
-                  {index + 1}
-                </td>
+                  <td>
+                    {index + 1}
+                  </td>
 
-                <td
-                  style={{
-                    padding: "12px",
-                  }}
-                >
-                  <Link
-                    href={`/pilote/${pilote.transpondeur}`}
-                    style={{
-                      textDecoration:
-                        "none",
-                      color:
-                        "#0070f3",
-                      fontWeight:
-                        "bold",
-                    }}
-                  >
-                    {pilote.pilote}
-                  </Link>
-                </td>
+                  <td>
+                    <Link
+                      href={`/pilote/${pilote.transpondeur}`}
+                      style={{
+                        fontWeight:
+                          "bold",
+                      }}
+                    >
+                      {
+                        pilote.pilote
+                      }
+                    </Link>
+                  </td>
 
-                <td
-                  style={{
-                    padding: "12px",
-                  }}
-                >
-                  {pilote.year}
-                </td>
+                  <td>
+                    {
+                      pilote.year
+                    }
+                  </td>
 
-                <td
-                  style={{
-                    padding: "12px",
-                  }}
-                >
-                  {pilote.sessions}
-                </td>
+                  <td>
+                    {
+                      pilote.sessions
+                    }
+                  </td>
 
-                <td
-                  style={{
-                    padding: "12px",
-                  }}
-                >
-                  {pilote.laps.toLocaleString()}
-                </td>
+                  <td>
+                    {pilote.laps.toLocaleString()}
+                  </td>
 
-                <td
-                  style={{
-                    padding: "12px",
-                  }}
-                >
-                  {pilote.bestLap.toFixed(
-                    3
-                  )}
-                </td>
+                  <td>
+                    {pilote.bestLap.toFixed(
+                      3
+                    )} s
+                  </td>
 
-                <td
-                  style={{
-                    padding: "12px",
-                  }}
-                >
-                  {pilote.maxSpeed.toFixed(
-                    3
-                  )}
-                </td>
+                  <td>
+                    {pilote.maxSpeed.toFixed(
+                      3
+                    )} km/h
+                  </td>
 
-              </tr>
+                </tr>
+              )
+            )}
 
-            )
-          )}
-
-        </tbody>
-
-      </table>
-
+          </tbody>
+        </table>
+      </div>
     </main>
   );
 }
