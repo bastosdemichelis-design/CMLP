@@ -63,13 +63,37 @@ if (
   );
 }
     
+if (
+  fs.existsSync(file)
+) {
 
-    if (
-      fs.existsSync(file)
-    ) {
-      skipped++;
-      continue;
-    }
+  const content =
+    fs.readFileSync(
+      file,
+      "utf8"
+    );
+
+  const validCsv =
+    content.includes(
+      "Transponder"
+    );
+
+  if (validCsv) {
+    skipped++;
+    continue;
+  }
+
+  console.log(
+    `🔄 CSV invalide détecté : ${activity.id}`
+  );
+
+  fs.unlinkSync(file);
+
+  console.log(
+    `🗑 Ancien fichier supprimé`
+  );
+}
+  
 
     try {
       const url =
