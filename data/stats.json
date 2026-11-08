@@ -531,13 +531,13 @@
     "pilote": "Xb2",
     "transpondeur": "9760422",
     "year": 2022,
-    "sessions": 20,
-    "laps": 1359,
+    "sessions": 19,
+    "laps": 1275,
     "bestLap": 26.014,
     "best3Consecutive": 32.95633333333333,
     "maxSpeed": 40.824,
-    "averageLap": 41.96018539657627,
-    "totalRuntimeMinutes": 941.5430833333334
+    "averageLap": 41.70280316178966,
+    "totalRuntimeMinutes": 878.6326666666668
   },
   {
     "pilote": "7385779 [0]",
