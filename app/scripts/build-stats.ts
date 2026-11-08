@@ -11,21 +11,19 @@ const drivers: any = {};
 const sessionsSummary: any[] = [];
 
 for (const activity of activities) {
-
   const file =
     `./data/sessions/${activity.id}.csv`;
 
-  if (!fs.existsSync(file))
+  if (!fs.existsSync(file)) {
     continue;
+  }
 
-  const csv =
-    fs.readFileSync(
-      file,
-      "utf8"
-    );
+  const csv = fs.readFileSync(
+    file,
+    "utf8"
+  );
 
-  const lines =
-    csv.split("\n");
+  const lines = csv.split("\n");
 
   let laps = 0;
   let bestLap = Number.MAX_VALUE;
@@ -37,25 +35,35 @@ for (const activity of activities) {
   const lapTimes: number[] = [];
 
   for (const line of lines) {
-
-    if (!line.includes("km/h"))
+    if (
+      !line.includes("km/h")
+    ) {
       continue;
+    }
 
     const cols =
       line.split(",");
 
-    if (cols.length < 8)
+    if (cols.length < 8) {
       continue;
+    }
 
     const lapTime =
-      cols[5];
+      cols[5]?.trim();
 
     const speed =
-      cols[7];
+      cols[7]?.trim();
+
+    /**
+     * Accepte :
+     * 0:00:42.990
+     * 0:01:27.661
+     * 0:02:15.123
+     */
 
     const timeMatch =
       lapTime.match(
-        /0:00:(\d+\.\d+)/
+        /(\d+):(\d+):(\d+\.\d+)/
       );
 
     const speedMatch =
@@ -64,48 +72,67 @@ for (const activity of activities) {
       );
 
     if (timeMatch) {
-
-      laps++;
-
-      const sec =
-        parseFloat(
+      const hours =
+        parseInt(
           timeMatch[1]
         );
 
-      lapTimes.push(sec);
+      const minutes =
+        parseInt(
+          timeMatch[2]
+        );
 
-      lapSum += sec;
+      const seconds =
+        parseFloat(
+          timeMatch[3]
+        );
 
-      if (sec < bestLap) {
-        bestLap = sec;
+      const totalSeconds =
+        hours * 3600 +
+        minutes * 60 +
+        seconds;
+
+      laps++;
+
+      lapTimes.push(
+        totalSeconds
+      );
+
+      lapSum +=
+        totalSeconds;
+
+      if (
+        totalSeconds <
+        bestLap
+      ) {
+        bestLap =
+          totalSeconds;
       }
     }
 
     if (speedMatch) {
-
       const kmh =
         parseFloat(
           speedMatch[1]
         );
 
-      if (kmh > maxSpeed) {
+      if (
+        kmh > maxSpeed
+      ) {
         maxSpeed = kmh;
       }
     }
   }
 
-  // Calcul du meilleur 3 tours consécutifs
-
   if (
     lapTimes.length >= 3
   ) {
-
     for (
       let i = 0;
-      i <= lapTimes.length - 3;
+      i <=
+      lapTimes.length - 3;
       i++
     ) {
-
       const avg =
         (
           lapTimes[i] +
@@ -136,9 +163,7 @@ for (const activity of activities) {
     `${pilote}-${year}`;
 
   if (!drivers[key]) {
-
     drivers[key] = {
-
       pilote,
 
       transpondeur:
@@ -168,11 +193,11 @@ for (const activity of activities) {
 
   drivers[key].laps += laps;
 
-  drivers[key].totalRuntimeMinutes +=
+  drivers[key]
+    .totalRuntimeMinutes +=
     lapSum / 60;
 
   if (laps > 0) {
-
     const currentAverage =
       lapSum / laps;
 
@@ -180,13 +205,10 @@ for (const activity of activities) {
       drivers[key]
         .averageLap === 0
     ) {
-
       drivers[key]
         .averageLap =
         currentAverage;
-
     } else {
-
       drivers[key]
         .averageLap =
         (
@@ -223,8 +245,6 @@ for (const activity of activities) {
       maxSpeed;
   }
 
-  // sessions-summary.json
-
   sessionsSummary.push({
     id: activity.id,
 
@@ -249,12 +269,14 @@ for (const activity of activities) {
 }
 
 const stats =
-  Object.values(drivers)
-    .sort(
-      (a: any, b: any) =>
-        a.bestLap -
-        b.bestLap
-    );
+  Object.values(drivers).sort(
+    (
+      a: any,
+      b: any
+    ) =>
+      a.bestLap -
+      b.bestLap
+  );
 
 fs.writeFileSync(
   "./data/stats.json",
