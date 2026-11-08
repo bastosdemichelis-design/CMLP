@@ -200,16 +200,6 @@ export default async function Page({
         </div>
 
         <div className="card">
-  <h3>
-    🛣️ Distance
-  </h3>
-
-  <h2>
-    {totalDistanceKm.toFixed(1)} km
-  </h2>
-</div>
-
-        <div className="card">
           <h3>
             🔄 Tours
           </h3>
