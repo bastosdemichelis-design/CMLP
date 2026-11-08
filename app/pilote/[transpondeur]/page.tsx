@@ -78,6 +78,11 @@ export default async function Page({
       0
     );
 
+    const totalDistanceKm =
+  (
+    totalLaps * 295
+  ) / 1000;
+
   const bestLap =
     Math.min(
       ...piloteStats.map(
@@ -195,6 +200,16 @@ export default async function Page({
         </div>
 
         <div className="card">
+  <h3>
+    🛣️ Distance
+  </h3>
+
+  <h2>
+    {totalDistanceKm.toFixed(1)} km
+  </h2>
+</div>
+
+        <div className="card">
           <h3>
             🔄 Tours
           </h3>
@@ -203,6 +218,16 @@ export default async function Page({
             {totalLaps.toLocaleString()}
           </h2>
         </div>
+
+        <div className="card">
+  <h3>
+    🛣️ Distance
+  </h3>
+
+  <h2>
+    {totalDistanceKm.toFixed(1)} km
+  </h2>
+</div>
 
         <div className="card">
           <h3>
@@ -264,6 +289,7 @@ export default async function Page({
               <th>Rang</th>
               <th>Sessions</th>
               <th>Tours</th>
+              <th>Distance</th>
               <th>Record</th>
               <th>3 tours</th>
               <th>Vitesse</th>
@@ -335,16 +361,23 @@ export default async function Page({
                         }
                       </td>
 
-                      <td>
-                        {yearStat.laps.toLocaleString()}
-                      </td>
+<td>
+  {yearStat.laps.toLocaleString()}
+</td>
 
-                      <td>
-                        {yearStat.bestLap.toFixed(
-                          3
-                        )}{" "}
-                        s
-                      </td>
+<td>
+  {(
+    yearStat.laps *
+    295 /
+    1000
+  ).toFixed(1)} km
+</td>
+
+<td>
+  {yearStat.bestLap.toFixed(
+    3
+  )} s
+</td>
 
                       <td>
                         {yearStat.best3Consecutive?.toFixed(
