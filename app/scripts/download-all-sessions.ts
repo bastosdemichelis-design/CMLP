@@ -39,12 +39,29 @@ async function downloadAll() {
 
     // Décommente pour tester uniquement Bastos#2
     
-    if (
-      activity.chipCode !==
-      "9336618"
-    ) {
-      continue;
-    }
+if (
+  fs.existsSync(file)
+) {
+  const content =
+    fs.readFileSync(
+      file,
+      "utf8"
+    );
+
+  const validCsv =
+    content.includes(
+      "Transponder"
+    );
+
+  if (validCsv) {
+    skipped++;
+    continue;
+  }
+
+  console.log(
+    `🔄 CSV invalide détecté : ${activity.id}`
+  );
+}
     
 
     if (
