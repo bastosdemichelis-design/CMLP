@@ -369,3 +369,19 @@ tbody tr:hover {
     padding: 16px;
   }
 }
+
+.card p {
+  color: var(--text);
+}
+
+.card span {
+  color: var(--text);
+}
+
+.card small {
+  color: var(--text-muted);
+}
+
+.card strong {
+  color: var(--text);
+}

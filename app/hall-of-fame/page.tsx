@@ -90,17 +90,11 @@ export default function HallOfFame() {
     ) => string,
     field: string
   ) => (
-    <div
-      style={{
-        border: "1px solid #ddd",
-        borderRadius: "12px",
-        padding: "20px",
-        background: "#fff",
-      }}
-    >
+    <div className="card">
       <h2
         style={{
           marginBottom: "20px",
+          color: "#f97316",
         }}
       >
         {title}
@@ -119,7 +113,7 @@ export default function HallOfFame() {
             style={{
               borderBottom:
                 index < 2
-                  ? "1px solid #eee"
+                  ? "1px solid #334155"
                   : "none",
               paddingBottom: "15px",
               marginBottom: "15px",
@@ -127,7 +121,8 @@ export default function HallOfFame() {
           >
             <div
               style={{
-                fontSize: "24px",
+                fontSize: "28px",
+                marginBottom: "10px",
               }}
             >
               {getMedal(index)}
@@ -138,12 +133,9 @@ export default function HallOfFame() {
               style={{
                 textDecoration:
                   "none",
-                fontWeight:
-                  "bold",
-                fontSize:
-                  "18px",
-                color:
-                  "#0070f3",
+                fontWeight: "bold",
+                fontSize: "22px",
+                color: "#60a5fa",
               }}
             >
               {pilote.pilote}
@@ -151,8 +143,11 @@ export default function HallOfFame() {
 
             <div
               style={{
-                marginTop: "5px",
-                fontSize: "20px",
+                marginTop: "10px",
+                fontSize: "24px",
+                fontWeight:
+                  "bold",
+                color: "#f8fafc",
               }}
             >
               {valueFormatter(
@@ -160,10 +155,15 @@ export default function HallOfFame() {
               )}
             </div>
 
-            <small>
-              Année :{" "}
-              {pilote.year}
-            </small>
+            <div
+              style={{
+                marginTop: "8px",
+                color: "#94a3b8",
+                fontSize: "14px",
+              }}
+            >
+              Année : {pilote.year}
+            </div>
           </div>
         )
       )}
@@ -171,11 +171,7 @@ export default function HallOfFame() {
   );
 
   return (
-    <main
-      style={{
-        padding: "30px",
-      }}
-    >
+    <main>
       <h1>
         🏆 Hall Of Fame CMLP
       </h1>
@@ -199,7 +195,6 @@ export default function HallOfFame() {
           }
           style={{
             marginLeft: "10px",
-            padding: "8px",
           }}
         >
           <option value="Toutes">
@@ -220,19 +215,12 @@ export default function HallOfFame() {
       </div>
 
       <div
-        style={{
-          display: "grid",
-          gridTemplateColumns:
-            "repeat(auto-fit,minmax(320px,1fr))",
-          gap: "25px",
-        }}
+        className="stats-grid"
       >
         {podiumCard(
           "🏆 Record absolu",
           podiumRecord,
-          (
-            value
-          ) =>
+          (value) =>
             `${value.toFixed(
               3
             )} s`,
@@ -242,9 +230,7 @@ export default function HallOfFame() {
         {podiumCard(
           "🎯 Meilleurs 3 tours consécutifs",
           podium3Tours,
-          (
-            value
-          ) =>
+          (value) =>
             `${value.toFixed(
               3
             )} s`,
@@ -254,9 +240,7 @@ export default function HallOfFame() {
         {podiumCard(
           "🔥 Plus gros rouleur",
           podiumTours,
-          (
-            value
-          ) =>
+          (value) =>
             `${value.toLocaleString()} tours`,
           "laps"
         )}
@@ -264,9 +248,7 @@ export default function HallOfFame() {
         {podiumCard(
           "🚀 Vitesse maximale",
           podiumVitesse,
-          (
-            value
-          ) =>
+          (value) =>
             `${value.toFixed(
               3
             )} km/h`,
