@@ -1,5 +1,38 @@
 [
   {
+    "id": 8593792134,
+    "pilote": "Hervé 2",
+    "transpondeur": "5565278",
+    "date": "2026-11-08T14:37:30+01:00",
+    "year": 2026,
+    "laps": 39,
+    "bestLap": 40.292,
+    "best3Consecutive": 43.101333333333336,
+    "maxSpeed": 26.358
+  },
+  {
+    "id": 8593661364,
+    "pilote": "MUGEN Mathieu",
+    "transpondeur": "3896571",
+    "date": "2026-11-08T14:18:57+01:00",
+    "year": 2026,
+    "laps": 52,
+    "bestLap": 40.843,
+    "best3Consecutive": 42.815666666666665,
+    "maxSpeed": 26.002
+  },
+  {
+    "id": 8593578861,
+    "pilote": "Alex",
+    "transpondeur": "3657433",
+    "date": "2026-11-08T14:08:37+01:00",
+    "year": 2026,
+    "laps": 70,
+    "bestLap": 32.632,
+    "best3Consecutive": 39.284666666666666,
+    "maxSpeed": 32.545
+  },
+  {
     "id": 8591849769,
     "pilote": "gabriel gerard",
     "transpondeur": "4283420",
@@ -12189,7 +12222,7 @@
   },
   {
     "id": 6121557552,
-    "pilote": "4286554 [0]",
+    "pilote": "BouBou",
     "transpondeur": "4286554",
     "date": "2025-06-15T07:58:26+02:00",
     "year": 2025,
@@ -12651,7 +12684,7 @@
   },
   {
     "id": 6121540101,
-    "pilote": "4286554 [0]",
+    "pilote": "BouBou",
     "transpondeur": "4286554",
     "date": "2025-06-14T09:23:33+02:00",
     "year": 2025,
@@ -13344,7 +13377,7 @@
   },
   {
     "id": 6121532787,
-    "pilote": "4286554 [0]",
+    "pilote": "BouBou",
     "transpondeur": "4286554",
     "date": "2025-06-13T15:35:44+02:00",
     "year": 2025,

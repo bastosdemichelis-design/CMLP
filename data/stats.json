@@ -387,13 +387,13 @@
     "pilote": "Hervé 2",
     "transpondeur": "5565278",
     "year": 2026,
-    "sessions": 13,
-    "laps": 548,
+    "sessions": 14,
+    "laps": 587,
     "bestLap": 25.75,
     "best3Consecutive": 29.717666666666663,
     "maxSpeed": 41.243,
-    "averageLap": 49.77602043664138,
-    "totalRuntimeMinutes": 440.98465000000004
+    "averageLap": 49.776202556157614,
+    "totalRuntimeMinutes": 472.7617000000001
   },
   {
     "pilote": "Mp10e ",
@@ -1383,13 +1383,13 @@
     "pilote": "Alex",
     "transpondeur": "3657433",
     "year": 2026,
-    "sessions": 26,
-    "laps": 1550,
+    "sessions": 27,
+    "laps": 1620,
     "bestLap": 28.734,
     "best3Consecutive": 36.153333333333336,
     "maxSpeed": 36.96,
-    "averageLap": 46.34823733042958,
-    "totalRuntimeMinutes": 1137.88455
+    "averageLap": 46.3482374289899,
+    "totalRuntimeMinutes": 1194.4426666666666
   },
   {
     "pilote": "Christophe Raboulin",
@@ -3303,13 +3303,13 @@
     "pilote": "MUGEN Mathieu",
     "transpondeur": "3896571",
     "year": 2026,
-    "sessions": 23,
-    "laps": 1330,
+    "sessions": 24,
+    "laps": 1382,
     "bestLap": 32.745,
     "best3Consecutive": 39.461000000000006,
     "maxSpeed": 32.432,
-    "averageLap": 48.59532484127813,
-    "totalRuntimeMinutes": 1032.8084500000002
+    "averageLap": 48.59532581667007,
+    "totalRuntimeMinutes": 1077.7764333333334
   },
   {
     "pilote": "3884805 [0]",
@@ -14736,7 +14736,7 @@
     "totalRuntimeMinutes": 39.46073333333332
   },
   {
-    "pilote": "4286554 [0]",
+    "pilote": "BouBou",
     "transpondeur": "4286554",
     "year": 2025,
     "sessions": 3,
