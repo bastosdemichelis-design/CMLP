@@ -1383,13 +1383,13 @@
     "pilote": "Alex",
     "transpondeur": "3657433",
     "year": 2026,
-    "sessions": 27,
-    "laps": 1620,
+    "sessions": 28,
+    "laps": 1646,
     "bestLap": 28.734,
     "best3Consecutive": 36.153333333333336,
     "maxSpeed": 36.96,
-    "averageLap": 46.3482374289899,
-    "totalRuntimeMinutes": 1194.4426666666666
+    "averageLap": 46.34823740086996,
+    "totalRuntimeMinutes": 1213.814483333333
   },
   {
     "pilote": "Christophe Raboulin",
