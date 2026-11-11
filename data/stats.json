@@ -2811,13 +2811,13 @@
     "pilote": "gabriel gerard",
     "transpondeur": "4283420",
     "year": 2026,
-    "sessions": 34,
-    "laps": 1695,
+    "sessions": 35,
+    "laps": 1715,
     "bestLap": 31.661,
     "best3Consecutive": 35.37533333333334,
     "maxSpeed": 33.543,
-    "averageLap": 51.206853371221044,
-    "totalRuntimeMinutes": 1378.9626333333333
+    "averageLap": 51.20685337095237,
+    "totalRuntimeMinutes": 1395.3136333333334
   },
   {
     "pilote": "9432887 [0]",
