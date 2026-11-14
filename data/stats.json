@@ -183,13 +183,13 @@
     "pilote": "Bastos#2",
     "transpondeur": "9336618",
     "year": 2026,
-    "sessions": 9,
-    "laps": 244,
+    "sessions": 10,
+    "laps": 321,
     "bestLap": 25.295,
     "best3Consecutive": 36.75333333333333,
     "maxSpeed": 41.985,
-    "averageLap": 59.28780934614218,
-    "totalRuntimeMinutes": 213.60801666666669
+    "averageLap": 59.294100780293974,
+    "totalRuntimeMinutes": 280.9394833333334
   },
   {
     "pilote": "William 1",
@@ -387,13 +387,13 @@
     "pilote": "Hervé 2",
     "transpondeur": "5565278",
     "year": 2026,
-    "sessions": 14,
-    "laps": 587,
+    "sessions": 15,
+    "laps": 635,
     "bestLap": 25.75,
     "best3Consecutive": 29.717666666666663,
     "maxSpeed": 41.243,
-    "averageLap": 49.776202556157614,
-    "totalRuntimeMinutes": 472.7617000000001
+    "averageLap": 49.77624958638644,
+    "totalRuntimeMinutes": 512.48835
   },
   {
     "pilote": "Mp10e ",
@@ -1383,13 +1383,13 @@
     "pilote": "Alex",
     "transpondeur": "3657433",
     "year": 2026,
-    "sessions": 28,
-    "laps": 1646,
+    "sessions": 29,
+    "laps": 1746,
     "bestLap": 28.734,
     "best3Consecutive": 36.153333333333336,
     "maxSpeed": 36.96,
-    "averageLap": 46.34823740086996,
-    "totalRuntimeMinutes": 1213.814483333333
+    "averageLap": 46.34823741038751,
+    "totalRuntimeMinutes": 1292.57955
   },
   {
     "pilote": "Christophe Raboulin",
@@ -15279,13 +15279,13 @@
     "pilote": "7385779 [0]",
     "transpondeur": "7385779",
     "year": 2026,
-    "sessions": 8,
-    "laps": 401,
+    "sessions": 9,
+    "laps": 415,
     "bestLap": 41.37,
     "best3Consecutive": 42.22166666666667,
     "maxSpeed": 25.671,
-    "averageLap": 55.238859214526116,
-    "totalRuntimeMinutes": 342.54401666666666
+    "averageLap": 55.260747025085124,
+    "totalRuntimeMinutes": 354.9936833333333
   },
   {
     "pilote": "PAUL TT MUGEN",
@@ -17086,6 +17086,18 @@
     "maxSpeed": 24.183,
     "averageLap": 50.75462363636363,
     "totalRuntimeMinutes": 88.59493333333333
+  },
+  {
+    "pilote": "3390165 [0]",
+    "transpondeur": "3390165",
+    "year": 2026,
+    "sessions": 1,
+    "laps": 128,
+    "bestLap": 43.954,
+    "best3Consecutive": 45.505,
+    "maxSpeed": 24.162,
+    "averageLap": 55.98332031250001,
+    "totalRuntimeMinutes": 119.43108333333336
   },
   {
     "pilote": "5345567",

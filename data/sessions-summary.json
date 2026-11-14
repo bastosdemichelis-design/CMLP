@@ -1,5 +1,60 @@
 [
   {
+    "id": 8621268675,
+    "pilote": "7385779 [0]",
+    "transpondeur": "7385779",
+    "date": "2026-11-14T15:15:25+01:00",
+    "year": 2026,
+    "laps": 14,
+    "bestLap": 44.862,
+    "best3Consecutive": 45.68066666666667,
+    "maxSpeed": 23.673
+  },
+  {
+    "id": 8620768530,
+    "pilote": "Hervé 2",
+    "transpondeur": "5565278",
+    "date": "2026-11-14T14:20:17+01:00",
+    "year": 2026,
+    "laps": 48,
+    "bestLap": 38.604,
+    "best3Consecutive": 40.684333333333335,
+    "maxSpeed": 27.51
+  },
+  {
+    "id": 8620718562,
+    "pilote": "Bastos#2",
+    "transpondeur": "9336618",
+    "date": "2026-11-14T14:14:24+01:00",
+    "year": 2026,
+    "laps": 77,
+    "bestLap": 42.701,
+    "best3Consecutive": 44.51833333333334,
+    "maxSpeed": 24.871
+  },
+  {
+    "id": 8620641399,
+    "pilote": "3390165 [0]",
+    "transpondeur": "3390165",
+    "date": "2026-11-14T14:05:00+01:00",
+    "year": 2026,
+    "laps": 128,
+    "bestLap": 43.954,
+    "best3Consecutive": 45.505,
+    "maxSpeed": 24.162
+  },
+  {
+    "id": 8620626330,
+    "pilote": "Alex",
+    "transpondeur": "3657433",
+    "date": "2026-11-14T14:03:25+01:00",
+    "year": 2026,
+    "laps": 100,
+    "bestLap": 35.014,
+    "best3Consecutive": 39.083333333333336,
+    "maxSpeed": 30.331
+  },
+  {
     "id": 8619010083,
     "pilote": "carlito",
     "transpondeur": "3806121",
