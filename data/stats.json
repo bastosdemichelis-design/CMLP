@@ -8235,13 +8235,13 @@
     "pilote": "carlito",
     "transpondeur": "3806121",
     "year": 2026,
-    "sessions": 4,
-    "laps": 270,
+    "sessions": 5,
+    "laps": 309,
     "bestLap": 37.563,
     "best3Consecutive": 37.98233333333334,
     "maxSpeed": 28.273,
-    "averageLap": 45.964301083996645,
-    "totalRuntimeMinutes": 207.68231666666668
+    "averageLap": 46.21892666674723,
+    "totalRuntimeMinutes": 240.38898333333333
   },
   {
     "pilote": "MP10 ",
